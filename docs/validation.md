@@ -9,7 +9,9 @@ universal agent compatibility or production certification.
 The commands in [README.md](../README.md#verification-and-limitations) verify:
 
 - Canonical manifest fields, a complete MIT notice inside the installed package,
-  UTF-8 source files, Python syntax and local Markdown link containment.
+  UTF-8 source files, Python syntax and local Markdown link containment. Owned
+  raw-document URLs in the root llms.txt index are mapped to files in the current
+  checkout and checked for existence and containment without network access.
 - Eight synthetic evaluation cases and their preparation metadata.
 - Six preparation tests covering instruction/license preservation, isolated output,
   host-specific instruction mapping and exclusion of evaluation answers/helpers

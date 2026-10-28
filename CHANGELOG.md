@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Add an optional root llms.txt documentation index with raw Markdown links and
+  offline validation of its repository targets. No automatic discovery or search
+  indexing guarantee is implied.
+
 ## 0.1.0 — 2026-10-28
 
 Initial experimental public distribution under the MIT license.

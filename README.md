@@ -11,6 +11,13 @@ silently changing a project's scope or authority.
 | --- | --- |
 | [Project Architecture & Blueprint](skills/project-architecture-and-blueprint/SKILL.md) | Architecture baselines, researched decisions, bounded experiments, implementation contracts, drift analysis and evidence-backed roadmaps. |
 
+The root [llms.txt](llms.txt) provides a concise documentation index with links to
+raw Markdown for AI tools that choose to use it. This follows the optional
+[llms.txt proposal](https://llmstxt.org/), originally intended for websites. In
+this GitHub repository it is a navigational aid; automatic discovery or search
+indexing is not guaranteed. The skill entry point remains `SKILL.md`, and
+repository contributor instructions remain in `AGENTS.md`.
+
 ## What the skill does
 
 The workflow starts from the actual repository and its constraints, investigates

@@ -14,6 +14,8 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "skills" / "project-architecture-and-blueprint"
+INDEX = ROOT / "llms.txt"
+PUBLIC_RAW_PREFIX = "https://raw.githubusercontent.com/osmyslabs/agent-skills/main/"
 EXCLUDED = {".git", "build", "__pycache__", ".idea"}
 MARKDOWN_LINK = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
 PERSONAL_PATH = re.compile(
@@ -51,6 +53,8 @@ def main() -> None:
         raise ValueError("Expected MIT license in skill frontmatter")
     if (ROOT / "LICENSE").read_bytes() != (SKILL / "LICENSE").read_bytes():
         raise ValueError("Installed skill must carry the complete repository license")
+    if not INDEX.is_file():
+        raise ValueError("Missing root documentation index: llms.txt")
     for required in ("references", "agents", "evals", "scripts"):
         if not (SKILL / required).is_dir():
             raise ValueError(f"Missing package directory: {required}")
@@ -66,13 +70,16 @@ def main() -> None:
         if path.suffix == ".py":
             ast.parse(text, filename=str(relative))
             python_count += 1
-        if path.suffix != ".md":
+        if path.suffix != ".md" and path != INDEX:
             continue
         boundary = SKILL if path.is_relative_to(SKILL) else ROOT
         for raw in MARKDOWN_LINK.findall(text):
             target = raw.strip()
             if target.startswith("<") and target.endswith(">"):
                 target = target[1:-1]
+            if path == INDEX and target.startswith(PUBLIC_RAW_PREFIX):
+                # Verify owned raw-document URLs against the current checkout.
+                target = target[len(PUBLIC_RAW_PREFIX):]
             parts = urlsplit(target)
             if parts.scheme in {"https", "http", "mailto"} or not parts.path:
                 continue
@@ -85,7 +92,7 @@ def main() -> None:
                 raise ValueError(f"Missing local link target in {relative}: {target}")
             link_count += 1
     print(
-        f"Verified {len(files)} UTF-8 files, {link_count} local Markdown links, "
+        f"Verified {len(files)} UTF-8 files, {link_count} repository document links, "
         f"{python_count} Python sources and matching MIT notices. "
         "No agent execution or external-link validation performed."
     )

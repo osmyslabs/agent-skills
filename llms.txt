@@ -1,0 +1,34 @@
+# Osmys Agent Skills
+
+> Experimental, MIT-licensed engineering workflows for agents that support the
+> open Agent Skills format. The current skill covers evidence-backed software
+> architecture, technical decisions, blueprints and implementation roadmaps.
+
+This index points to the current documentation on the main branch. For repeatable
+installation, select a reviewed release tag or commit and copy the complete skill
+folder, including its license and references. Native discovery and invocation
+depend on the agent host; this index does not install or activate a skill.
+
+## Getting started
+
+- [Overview and installation](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/README.md): Purpose, complete-folder installation, host locations and examples.
+- [Project Architecture and Blueprint skill](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/SKILL.md): Canonical skill metadata, workflow, scope and conditional references.
+- [Agent hosts and portability](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/agent-hosts.md): Codex, Claude Code and GitHub Copilot placement and invocation conventions.
+- [Validation record](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/docs/validation.md): Checks actually performed, native-host evidence and compatibility limitations.
+
+## Architecture references
+
+- [Blueprint documents and roadmaps](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/blueprint-documents.md): Adaptable documentation contracts and implementation tracking.
+- [Decision quality and experiments](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/decision-quality-and-experiments.md): Alternatives, uncertainty, bounded experiments and capacity/cost evidence.
+- [Domain boundaries and dependencies](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/domain-boundaries-and-dependencies.md): Business contexts, inward dependencies and enforceable architecture boundaries.
+- [Threat analysis](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/threat-analysis.md): Assets, trust boundaries, abuse scenarios, controls and residual risks.
+- [Service operation and safe evolution](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/service-operation-and-safe-evolution.md): Service objectives, mixed-version migrations, recovery and staged rollout evidence.
+- [Terraform production lifecycle](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/terraform-production-lifecycle.md): Infrastructure state, bootstrap, CI identity and deployment controls.
+
+## Optional
+
+- [Evaluation guide](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/evals/README.md): Synthetic cases and isolated preparation; model execution is separate from offline checks.
+- [Repository contributor instructions](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/AGENTS.md): Rules for work inside this repository.
+- [Contributing](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/CONTRIBUTING.md): Reproducible changes and verification expectations.
+- [Security reporting](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/SECURITY.md): Private vulnerability reporting and support scope.
+- [License](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/LICENSE): MIT terms for original content; linked publications retain their own rights.

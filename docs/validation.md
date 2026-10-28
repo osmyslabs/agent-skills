@@ -28,6 +28,12 @@ Local checks use Python 3.12 and 3.13 on Windows. The repository's
 Linux and Windows with Python 3.10 and 3.13. A workflow result is evidence for
 that revision only; inspect the associated commit and run before relying on it.
 
+The [first hosted run](https://github.com/osmyslabs/agent-skills/actions/runs/40780382718)
+exposed a Windows test comparison between short and expanded temporary-path
+spellings. The expected destination is now resolved before comparison; all
+file-preservation and byte-copy assertions remain in place. The failed run is
+retained in Actions rather than counted as a passing result.
+
 The validator checks local link targets, not external URL availability or every
 Markdown anchor. Helper tests do not execute an AI model or measure its quality.
 

@@ -43,7 +43,9 @@ class InstallTests(unittest.TestCase):
                     target_root.mkdir()
                     result = install_skill(self.source, target_root, agent, scope)
                     target = target_root / locations[(agent, scope)]
-                    self.assertEqual(Path(result["destination"]), target)
+                    # Windows temporary roots can use an 8.3 alias. The installer
+                    # reports the resolved destination; compare the same form.
+                    self.assertEqual(Path(result["destination"]), target.resolve())
                     self.assertEqual({p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()}, expected)
                     self.assertTrue((target / "references/details.md").is_file())
                     self.assertFalse((target_root / "CLAUDE.md").exists())

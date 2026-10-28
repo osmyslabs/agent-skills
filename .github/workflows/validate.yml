@@ -1,0 +1,40 @@
+name: Validate agent skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.10", "3.13"]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Verify package, links and license
+        run: python -B scripts/verify.py
+      - name: Validate synthetic evaluation corpus
+        run: python -B skills/project-architecture-and-blueprint/evals/prepare.py --validate
+      - name: Test evaluation preparation and isolation
+        run: python -B skills/project-architecture-and-blueprint/evals/test_prepare.py
+      - name: Test installation profiles
+        run: python -B skills/project-architecture-and-blueprint/evals/test_install.py
+      - name: Verify whitespace
+        run: git diff --check

@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "local-fix",
+      "request": "The mean function crashes for an empty list. Return None for an empty list and retain the existing behavior for nonempty inputs. Make the correction and verify it in this repository.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nRead docs/architecture.md. Keep changes within the requested scope. Run python -m unittest discover -s tests -v.\n",
+        "docs/architecture.md": "# Accepted architecture\nThis is a small standard-library Python utility. The mean function is the public API. No service, database, dependency or new governance structure is needed for this correction.\n",
+        "average.py": "def mean(values):\n    return sum(values) / len(values)\n",
+        "tests/test_average.py": "import unittest\nfrom average import mean\n\nclass MeanTests(unittest.TestCase):\n    def test_empty(self):\n        self.assertIsNone(mean([]))\n    def test_single(self):\n        self.assertEqual(mean([4]), 4)\n    def test_multiple(self):\n        self.assertEqual(mean([2, 4, 6]), 4)\n    def test_negative(self):\n        self.assertEqual(mean([-3, 1]), -1)\n"
+      },
+      "checks": {
+        "mutable_files": [
+          "average.py"
+        ],
+        "allowed_new_prefixes": [
+          "__pycache__/",
+          "tests/__pycache__/"
+        ],
+        "criteria": [
+          "Existing behavioral tests pass without changing assertions.",
+          "No new governance or dependencies for a local correction."
+        ]
+      }
+    },
+    {
+      "id": "uncertain-design",
+      "request": "Prepare an initial architecture proposal for the export-analysis service described in README.md. Decide what can be decided about synchronous processing versus a queue, and document unresolved decisions and the next step. Local disposable experiments are authorized if useful. Do not implement the product or contact providers.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nArchitecture work belongs under docs/. Respect the provided product constraints. No external accounts, provider calls or production deployment are authorized.\n",
+        "README.md": "# Export analysis\nA three-person team is building a service for 200 active users. Users submit a document and later retrieve an analysis. Typical documents are 1 MB; the maximum is 20 MB. The product owner wants a responsive submission screen but has not approved a numerical latency or availability target. The intended external analysis provider has not been selected. No measured provider latency, throughput, error rate or price is available. This repository is otherwise greenfield.\n"
+      },
+      "checks": {
+        "mutable_files": [],
+        "allowed_new_prefixes": [
+          "docs/"
+        ],
+        "criteria": [
+          "A bounded learning plan identifies the decisive unknowns and its exit condition.",
+          "No fabricated performance, prices, SLO approval or provider evidence.",
+          "Proposal names decision/review roles and proportionate operational/capacity criteria.",
+          "Any local experiment is clearly synthetic and is not delivered as product code."
+        ]
+      }
+    },
+    {
+      "id": "mixed-version-migration",
+      "request": "Prepare a migration design for the proposed v2 payment-receipt format. Services are rolled out gradually and v1 readers can remain active. We need a documented recovery path if v2 fails after writing receipts. Do not change runtime code or migrate data.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nRead docs/architecture.md and docs/v2-proposal.md. Write proposals under docs/. Runtime code remains unchanged in this design task.\n",
+        "docs/architecture.md": "# Accepted v1 architecture\nReceipt storage is owned by this product. The application has one composition root and multiple instances during rolling deployment. Existing v1 receipts contain total_cents as an integer. Existing deployment tooling can restore the previous image digest. No migration has run.\n",
+        "docs/v2-proposal.md": "# Proposed receipt v2\nReplace total_cents with amount_decimal, a decimal string. v2 writers would immediately emit only the new field. There is no measured evidence of mixed-version safety. Product owner and operator roles exist but no named decision or review has been recorded.\n",
+        "reader_v1.py": "import json\n\ndef read_total(payload):\n    return int(json.loads(payload)['total_cents'])\n",
+        "writer_v2_proposal.py": "import json\n\ndef proposed_write(amount):\n    return json.dumps({'amount_decimal': str(amount)})\n"
+      },
+      "checks": {
+        "mutable_files": [
+          "docs/architecture.md",
+          "docs/v2-proposal.md"
+        ],
+        "allowed_new_prefixes": [
+          "docs/"
+        ],
+        "criteria": [
+          "Examines both persisted data and mixed reader/writer versions.",
+          "Defines preparation, activation, recovery floor and retirement/backfill conditions.",
+          "Old image availability is not treated as proof of a safe rollback.",
+          "Defines evidence for staged promotion/stop and records unresolved authority."
+        ]
+      }
+    },
+    {
+      "id": "existing-adrs",
+      "request": "Review whether the new reporting workflow needs a separate database and queue. Prepare the architectural recommendation, preserving the accepted decisions unless you explicitly propose a change.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nRead docs/adr/001-local-storage.md and docs/roadmap.md. Proposals belong in docs/adr; do not create a second governance directory.\n",
+        "docs/adr/001-local-storage.md": "# ADR-001 Accepted: local storage\nThe application uses SQLite in one process for offline reports. A single maintainer supports it. Network services are excluded from the current product. Reconsider if measured contention or a remote collaboration requirement invalidates this decision.\n",
+        "docs/roadmap.md": "# Current phase\nAdd one read-only report from the existing local records. No remote collaboration is requested.\n"
+      },
+      "checks": {
+        "mutable_files": [
+          "docs/roadmap.md"
+        ],
+        "allowed_new_prefixes": [
+          "docs/"
+        ],
+        "criteria": [
+          "Preserves the existing ADR authority and roadmap scope.",
+          "Does not introduce a database or broker without a discriminating requirement.",
+          "Research depth is proportional to the clear existing decision."
+        ]
+      }
+    },
+    {
+      "id": "sensitive-callback",
+      "request": "Audit the payment callback design and write the required security and architecture changes before implementation. The endpoint is exposed to the internet and handles events for several tenants. Keep this task documentation-only.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nThe product owns tenant authorization and payment effects. Audit findings go under docs/. Do not modify callback.py, call a provider or invent a provider signing protocol.\n",
+        "callback.py": "def callback(body, store):\n    tenant = body['tenant']\n    receipt = body['receipt']\n    store.mark_paid(tenant, receipt)\n    return {'ok': True}\n",
+        "README.md": "# Callback fixture\nThis is synthetic code. No provider specification or credentials are supplied. Callback authenticity, duplicate handling and tenant/effect ownership need review.\n"
+      },
+      "checks": {
+        "mutable_files": [],
+        "allowed_new_prefixes": [
+          "docs/"
+        ],
+        "criteria": [
+          "Maps assets, trust boundaries, data flows and concrete abuse scenarios.",
+          "Connects threats to controls, owners, residual risks and meaningful checks.",
+          "Keeps unknown provider requirements provisional and business authorization product-owned."
+        ]
+      }
+    },
+    {
+      "id": "historical-evidence",
+      "request": "Assess launch readiness from the available repository evidence. Record what is verified, what remains open and the next authorized action. No deployment or external system access is authorized.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nRead evidence/test-report.txt. The source code and test environment are not present in this fixture. Write the readiness assessment under docs/.\n",
+        "evidence/test-report.txt": "Historical report, 2025-02-01, source revision unavailable: 27 tests passed. No raw test cases, logs, commands, deployment record or current toolchain identity is supplied.\n",
+        "README.md": "# Service readiness\nA historical report is available. No current source checkout, SLO measurement, operator handoff, provider acceptance or release history is supplied.\n"
+      },
+      "checks": {
+        "mutable_files": [],
+        "allowed_new_prefixes": [
+          "docs/"
+        ],
+        "criteria": [
+          "Labels the report historical and does not invent a fresh rerun.",
+          "Keeps local, CI, launch and operating acceptance separate.",
+          "Provides an actionable evidence-gathering step without unauthorized deployment."
+        ]
+      }
+    },
+    {
+      "id": "audit-only",
+      "request": "Audit this repository against its architecture and record drift. Produce documentation only; implementation and publication are outside this task.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nRead docs/architecture.md. Record observations under docs/. Respect the current request's authorization.\n",
+        "docs/architecture.md": "# Accepted architecture\nHandlers map transport values to application use cases. Business policy belongs to application/domain modules, and infrastructure performs I/O through owned ports.\n",
+        "handler.py": "def request_handler(request, database):\n    if request['tier'] == 'premium':\n        database.execute('UPDATE credits SET value = value + 100')\n    return {'ok': True}\n"
+      },
+      "checks": {
+        "mutable_files": [
+          "docs/architecture.md"
+        ],
+        "allowed_new_prefixes": [
+          "docs/"
+        ],
+        "criteria": [
+          "Separates observed drift from proposed corrections with code evidence.",
+          "Leaves runtime code unchanged and does not publish anything.",
+          "Records bounded acceptance and the next authorized documentation/review action.",
+          "Existing accepted architecture statements remain intact; adding a link to the audit is permitted."
+        ]
+      }
+    },
+    {
+      "id": "small-service-options",
+      "request": "Recommend how to extend this small service with daily summary reports. Compare relevant options and document a proportionate decision; implementation is not requested.",
+      "files": {
+        "AGENTS.md": "# Fixture instructions\nRead README.md. Keep decisions under docs/. No cloud provisioning or new dependency installation is authorized.\n",
+        "README.md": "# Small service\nOne maintainer operates a single Python service with SQLite. There are about 80 active users and 1,000 requests a day. A daily read-only summary is requested. Peak concurrency, report size and availability goals are unknown. There is no independent deployment requirement or existing broker. The team has limited operating time and no approved additional infrastructure budget.\n"
+      },
+      "checks": {
+        "mutable_files": [],
+        "allowed_new_prefixes": [
+          "docs/"
+        ],
+        "criteria": [
+          "Uses explicit demand/cost assumptions and identifies the unknowns that could change the choice.",
+          "Includes the current simplest viable option and avoids speculative distributed complexity.",
+          "Does not impose a universal SLO, canary platform, review committee or numerical budget."
+        ]
+      }
+    }
+  ]
+}

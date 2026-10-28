@@ -1,0 +1,5 @@
+# Optional OpenAI host metadata; common instructions live in SKILL.md.
+interface:
+  display_name: "Project Architecture & Blueprint"
+  short_description: "Evidence-backed architecture, governance and roadmaps"
+  default_prompt: "Use $project-architecture-and-blueprint to inspect this repository and create or update its architecture blueprint and roadmap within the authorized scope."

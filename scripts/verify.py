@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "project-architecture-and-blueprint"
+SKILLS = sorted(path for path in (ROOT / "skills").iterdir() if path.is_dir())
 INDEX = ROOT / "llms.txt"
 PUBLIC_RAW_PREFIX = "https://raw.githubusercontent.com/osmyslabs/agent-skills/main/"
 EXCLUDED = {".git", "build", "__pycache__", ".idea"}
@@ -40,24 +40,29 @@ def repository_files(directory: Path):
 
 
 def main() -> None:
-    manifest = (SKILL / "SKILL.md").read_text(encoding="utf-8")
-    if not manifest.startswith("---\n"):
-        raise ValueError("SKILL.md must start with YAML frontmatter")
-    frontmatter = manifest.split("---", 2)[1]
-    fields = dict(re.findall(r"^([a-z-]+): (.+)$", frontmatter, re.MULTILINE))
-    if fields.get("name") != SKILL.name:
-        raise ValueError("Canonical skill name differs from its folder")
-    if not 1 <= len(fields.get("description", "")) <= 1024:
-        raise ValueError("Expected a nonempty description of at most 1024 characters")
-    if fields.get("license") != "MIT":
-        raise ValueError("Expected MIT license in skill frontmatter")
-    if (ROOT / "LICENSE").read_bytes() != (SKILL / "LICENSE").read_bytes():
-        raise ValueError("Installed skill must carry the complete repository license")
+    if not SKILLS:
+        raise ValueError("Expected at least one skill in the catalog")
+    for skill in SKILLS:
+        manifest = (skill / "SKILL.md").read_text(encoding="utf-8")
+        if not manifest.startswith("---\n"):
+            raise ValueError(f"{skill.name}: missing YAML frontmatter")
+        fields = dict(re.findall(r"^([a-z-]+): (.+)$", manifest.split("---", 2)[1], re.MULTILINE))
+        if fields.get("name") != skill.name or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", skill.name) or len(skill.name) > 64:
+            raise ValueError(f"{skill.name}: invalid canonical name")
+        if not 1 <= len(fields.get("description", "")) <= 1024 or fields.get("license") != "MIT":
+            raise ValueError(f"{skill.name}: expected a description and MIT license")
+        if (ROOT / "LICENSE").read_bytes() != (skill / "LICENSE").read_bytes():
+            raise ValueError(f"{skill.name}: missing complete repository license")
+        for required in ("references", "agents", "evals", "scripts"):
+            if not (skill / required).is_dir():
+                raise ValueError(f"{skill.name}: missing {required}")
+        if (skill / "scripts/install.py").read_bytes() != (ROOT / "scripts/install.py").read_bytes():
+            raise ValueError(f"{skill.name}: installer differs from the maintained repository copy")
+        route = f"skills/{skill.name}/SKILL.md"
+        if any(route not in (ROOT / name).read_text(encoding="utf-8") for name in ("README.md", "llms.txt")):
+            raise ValueError(f"{skill.name}: missing from a public catalog entry point")
     if not INDEX.is_file():
         raise ValueError("Missing root documentation index: llms.txt")
-    for required in ("references", "agents", "evals", "scripts"):
-        if not (SKILL / required).is_dir():
-            raise ValueError(f"Missing package directory: {required}")
 
     files = list(repository_files(ROOT))
     link_count = 0
@@ -72,7 +77,7 @@ def main() -> None:
             python_count += 1
         if path.suffix != ".md" and path != INDEX:
             continue
-        boundary = SKILL if path.is_relative_to(SKILL) else ROOT
+        boundary = next((skill for skill in SKILLS if path.is_relative_to(skill)), ROOT)
         for raw in MARKDOWN_LINK.findall(text):
             target = raw.strip()
             if target.startswith("<") and target.endswith(">"):
@@ -93,7 +98,7 @@ def main() -> None:
             link_count += 1
     print(
         f"Verified {len(files)} UTF-8 files, {link_count} repository document links, "
-        f"{python_count} Python sources and matching MIT notices. "
+        f"{python_count} Python sources and {len(SKILLS)} independently licensed skills. "
         "No agent execution or external-link validation performed."
     )
 

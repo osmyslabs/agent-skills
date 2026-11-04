@@ -7,6 +7,7 @@ import unittest
 
 from prepare import prepare
 from inspect_run import inspect_run
+from install import SKILL_NAME
 
 
 class PreparationTests(unittest.TestCase):
@@ -16,7 +17,7 @@ class PreparationTests(unittest.TestCase):
         self.root = Path(self.temporary.name)
         self.skill = self.root / "instructions"
         self.skill.mkdir()
-        (self.skill / "SKILL.md").write_text("Selected instruction snapshot\n", encoding="utf-8")
+        (self.skill / "SKILL.md").write_text(f"---\nname: {SKILL_NAME}\ndescription: Fixture instructions\n---\nSelected instruction snapshot\n", encoding="utf-8")
         (self.skill / "LICENSE").write_bytes(b"Fixture license notice\n")
         (self.skill / "references").mkdir()
         (self.skill / "references/guide.md").write_text("Conditional reference\n", encoding="utf-8")
@@ -39,16 +40,16 @@ class PreparationTests(unittest.TestCase):
         result = prepare(self.corpus, "example", self.skill, self.root / "run")
         workspace = result / "workspace"
         self.assertEqual((workspace / "docs/input.txt").read_bytes(), self.case["files"]["docs/input.txt"].encode("utf-8"))
-        installed = workspace / ".agents/skills/project-architecture-and-blueprint"
+        installed = workspace / f".agents/skills/{SKILL_NAME}"
         self.assertEqual((installed / "SKILL.md").read_bytes(), original)
         self.assertEqual((installed / "LICENSE").read_bytes(), (self.skill / "LICENSE").read_bytes())
         self.assertTrue((installed / "references/guide.md").is_file())
         self.assertFalse((installed / "evals").exists())
         manifest = json.loads((result / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(set(manifest["initial_files_sha256"]), {
-            "docs/input.txt", ".agents/skills/project-architecture-and-blueprint/SKILL.md",
-            ".agents/skills/project-architecture-and-blueprint/LICENSE",
-            ".agents/skills/project-architecture-and-blueprint/references/guide.md",
+            "docs/input.txt", f".agents/skills/{SKILL_NAME}/SKILL.md",
+            f".agents/skills/{SKILL_NAME}/LICENSE",
+            f".agents/skills/{SKILL_NAME}/references/guide.md",
         })
         for path in result.rglob("*"):
             if path.is_file():
@@ -58,7 +59,7 @@ class PreparationTests(unittest.TestCase):
         (installed / "SKILL.md").write_text("Unauthorized instruction change\n", encoding="utf-8")
         inspection = inspect_run(result, self.corpus)
         self.assertFalse(inspection["workspace_effect_check_passed"])
-        self.assertIn(".agents/skills/project-architecture-and-blueprint/SKILL.md", inspection["forbidden_effects"])
+        self.assertIn(f".agents/skills/{SKILL_NAME}/SKILL.md", inspection["forbidden_effects"])
 
     def test_existing_output_is_preserved(self):
         output = self.root / "prior-run"
@@ -73,7 +74,7 @@ class PreparationTests(unittest.TestCase):
     def test_fixture_cannot_escape_workspace(self):
         sentinel = self.root / "outside.txt"
         sentinel.write_bytes(b"protected")
-        for unsafe in ("../../outside.txt", "/absolute.txt", "X:/outside.txt", "..\\outside.txt", ".agents/skills/project-architecture-and-blueprint/SKILL.md"):
+        for unsafe in ("../../outside.txt", "/absolute.txt", "X:/outside.txt", "..\\outside.txt", f".agents/skills/{SKILL_NAME}/SKILL.md"):
             with self.subTest(path=unsafe):
                 self.case["files"] = {unsafe: "replace"}
                 self.write_corpus()
@@ -91,9 +92,9 @@ class PreparationTests(unittest.TestCase):
         self.case["files"]["AGENTS.md"] = "Read docs/input.txt; output only documentation.\n"
         self.write_corpus()
         expected = {
-            "codex": (".agents/skills/project-architecture-and-blueprint", "AGENTS.md", "$project-architecture-and-blueprint"),
-            "claude": (".claude/skills/project-architecture-and-blueprint", "CLAUDE.md", "/project-architecture-and-blueprint"),
-            "copilot": (".github/skills/project-architecture-and-blueprint", ".github/copilot-instructions.md", "Use project-architecture-and-blueprint"),
+            "codex": (f".agents/skills/{SKILL_NAME}", "AGENTS.md", f"${SKILL_NAME}"),
+            "claude": (f".claude/skills/{SKILL_NAME}", "CLAUDE.md", f"/{SKILL_NAME}"),
+            "copilot": (f".github/skills/{SKILL_NAME}", ".github/copilot-instructions.md", f"Use {SKILL_NAME}"),
         }
         for host, (location, instructions, invocation) in expected.items():
             with self.subTest(host=host):

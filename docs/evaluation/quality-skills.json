@@ -1,0 +1,625 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-04",
+  "solver": "Codex delegated solvers with fresh task context; exact model identifier not captured",
+  "grader": "Maintaining agent; unblinded semantic review plus file/hash inspection and focused functional reruns",
+  "counts": {
+    "accepted_by_maintainer": 6,
+    "failed_file_scope": 3,
+    "interrupted_ungraded": 1
+  },
+  "distinct_cases": 6,
+  "catalog_cases": 20,
+  "limits": [
+    "Synthetic sample only; no full corpus coverage or statistical success rate.",
+    "No complete tool/network trace; raw local workspaces, prior corpus snapshots and handoffs not distributed.",
+    "Native Claude Code/Copilot execution unverified; metadata discovery is separate from solver behavior.",
+    "Performance results do not establish a production SLA; security results do not certify the system."
+  ],
+  "runs": [
+    {
+      "skill": "technical-debt-remediation",
+      "run": "run-01",
+      "case": "compatibility-refactor",
+      "task_sha256": "9b9b77b344c1f8550530c166990d3f6112a9c9676074657e313991efa586daaa",
+      "corpus_sha256": "12f8ed94caf359e2d645c86b19067e2003a7fa7e404fa21d850c2c31426cf2c7",
+      "instruction_sha256": {
+        "SKILL.md": "17d1d8831bb58b1d42446816bf7a9ab05c6e4e4c2ee77594190ef237d528bd77",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "cd65640b2fd3613620db0dfd66e5a232ad85490ce05944470c1afc07aee9bbd9",
+        "references/compatibility-and-characterization.md": "09b47343a33db01e8288338b1beb4cf3fadd350928c55bb2709d9a5b9fa8b339",
+        "references/prioritization-and-remediation.md": "7b68a43639862946a67371d657a1d1b244a151599e9971a63a4580df272f5fdf",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "agents/openai.yaml": "8dc5cdd38711262db3b5ae23aaa6203bd4a46fe596aa43bc10ff1db742aa3069"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/technical-debt-remediation/agents/openai.yaml": "8dc5cdd38711262db3b5ae23aaa6203bd4a46fe596aa43bc10ff1db742aa3069",
+        ".agents/skills/technical-debt-remediation/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/technical-debt-remediation/references/agent-hosts.md": "cd65640b2fd3613620db0dfd66e5a232ad85490ce05944470c1afc07aee9bbd9",
+        ".agents/skills/technical-debt-remediation/references/compatibility-and-characterization.md": "09b47343a33db01e8288338b1beb4cf3fadd350928c55bb2709d9a5b9fa8b339",
+        ".agents/skills/technical-debt-remediation/references/prioritization-and-remediation.md": "7b68a43639862946a67371d657a1d1b244a151599e9971a63a4580df272f5fdf",
+        ".agents/skills/technical-debt-remediation/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/technical-debt-remediation/SKILL.md": "17d1d8831bb58b1d42446816bf7a9ab05c6e4e4c2ee77594190ef237d528bd77",
+        "AGENTS.md": "355da277a360598d5d7b7cc546b1af1f4cbd5661d8df92ecfab3d8e411d115d1",
+        "docs/adr-001.md": "b6736bf75ae30caaa5f7dccb7e0ee05505cb5266182a8c1ab928922ecb0aecfb",
+        "references.py": "94e4d77f5f0af223b1c077d0c2261017ce74292e66afdeeaa7f7d5fa4f737b9e",
+        "test_references.py": "20e3845a133474fd7605f5e66cd9aec7d5e9e2dd09bf78fd737402e942d62259"
+      },
+      "file_effects": {
+        "changed": [
+          "references.py"
+        ],
+        "deleted": [],
+        "added": [
+          "__pycache__/references.cpython-313.pyc",
+          "__pycache__/test_reference_boundaries.cpython-313.pyc",
+          "__pycache__/test_references.cpython-313.pyc",
+          "docs/reference-formatting-evidence.md",
+          "test_reference_boundaries.py"
+        ],
+        "forbidden_effects": [
+          "__pycache__/references.cpython-313.pyc",
+          "__pycache__/test_reference_boundaries.cpython-313.pyc",
+          "__pycache__/test_references.cpython-313.pyc",
+          "test_reference_boundaries.py"
+        ],
+        "workspace_effect_check_passed": false
+      },
+      "artifact_sha256": {
+        "references.py": "3603dbe9ffc914277cee21391d61996bc8df5724905e11350f4102209dff7a66",
+        "__pycache__/references.cpython-313.pyc": "2d8e3ba44f43a87deb0f70b4aa84b199fb208960da28e1d90309d99067c27d29",
+        "__pycache__/test_reference_boundaries.cpython-313.pyc": "8523ff2d9d89c5dd23a21f636ef67700768d9e13c056c15680034840b72d527d",
+        "__pycache__/test_references.cpython-313.pyc": "1d4020374b71cf327d21b502b532eed62a5f1d6235c2b4322b3ba163fa1a0298",
+        "docs/reference-formatting-evidence.md": "0a8adca281a70a3b35b04605b36e9535543f89ec6526e3c1f8df5d4af237318e",
+        "test_reference_boundaries.py": "72be607acd25cd79d6f024956732454b7ef67a3911e0c7ac5a5a04137d4a149d"
+      },
+      "status": "failed_file_scope",
+      "observation": "Initial task/harness ambiguity: extra test/bytecode locations or changes to protected test bytes; not counted as a passing run."
+    },
+    {
+      "skill": "technical-debt-remediation",
+      "run": "run-02",
+      "case": "retain-stable-adapter",
+      "task_sha256": "c48ffd7337c7cbc1b415ac61c0c04497466ec1236318df9d1c941c31cf05dffa",
+      "corpus_sha256": "12f8ed94caf359e2d645c86b19067e2003a7fa7e404fa21d850c2c31426cf2c7",
+      "instruction_sha256": {
+        "SKILL.md": "17d1d8831bb58b1d42446816bf7a9ab05c6e4e4c2ee77594190ef237d528bd77",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "cd65640b2fd3613620db0dfd66e5a232ad85490ce05944470c1afc07aee9bbd9",
+        "references/compatibility-and-characterization.md": "09b47343a33db01e8288338b1beb4cf3fadd350928c55bb2709d9a5b9fa8b339",
+        "references/prioritization-and-remediation.md": "7b68a43639862946a67371d657a1d1b244a151599e9971a63a4580df272f5fdf",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "agents/openai.yaml": "8dc5cdd38711262db3b5ae23aaa6203bd4a46fe596aa43bc10ff1db742aa3069"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/technical-debt-remediation/agents/openai.yaml": "8dc5cdd38711262db3b5ae23aaa6203bd4a46fe596aa43bc10ff1db742aa3069",
+        ".agents/skills/technical-debt-remediation/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/technical-debt-remediation/references/agent-hosts.md": "cd65640b2fd3613620db0dfd66e5a232ad85490ce05944470c1afc07aee9bbd9",
+        ".agents/skills/technical-debt-remediation/references/compatibility-and-characterization.md": "09b47343a33db01e8288338b1beb4cf3fadd350928c55bb2709d9a5b9fa8b339",
+        ".agents/skills/technical-debt-remediation/references/prioritization-and-remediation.md": "7b68a43639862946a67371d657a1d1b244a151599e9971a63a4580df272f5fdf",
+        ".agents/skills/technical-debt-remediation/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/technical-debt-remediation/SKILL.md": "17d1d8831bb58b1d42446816bf7a9ab05c6e4e4c2ee77594190ef237d528bd77",
+        "adapter.py": "36fabddb6c6eab76988a0665607865dee59a957f576de8e2545ea853a47c1aa8",
+        "AGENTS.md": "355da277a360598d5d7b7cc546b1af1f4cbd5661d8df92ecfab3d8e411d115d1",
+        "docs/consumers.md": "04932252a9dcfd143f4c5fda92d8538f8adce812338afb99d97b78c61bc31275"
+      },
+      "file_effects": {
+        "changed": [],
+        "deleted": [],
+        "added": [
+          "docs/debt-assessment.md"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "docs/debt-assessment.md": "1f88e40b9b5853511873b140d0451a0a86c6dff5bf328e8e7edecdbeb5c9b23c"
+      },
+      "status": "accepted_by_maintainer",
+      "handoff_sha256": "6f6d0dc937d4b4f406743b16c4c11183b1339f0bca550cbb7c37f944405d067d",
+      "observation": "Retains the adapter because observed benefit does not justify compatibility and migration cost; records revisit conditions."
+    },
+    {
+      "skill": "technical-debt-remediation",
+      "run": "run-03",
+      "case": "compatibility-refactor",
+      "task_sha256": "cdb86aeb1bc5512f5b0f30b74b85b0dab6ac319d7e998ecb91122b3c5aa96998",
+      "corpus_sha256": "17a7568d09662a593958323be15e4e027de289fd709f362ad240b7509966ae8f",
+      "instruction_sha256": {
+        "SKILL.md": "17d1d8831bb58b1d42446816bf7a9ab05c6e4e4c2ee77594190ef237d528bd77",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "cd65640b2fd3613620db0dfd66e5a232ad85490ce05944470c1afc07aee9bbd9",
+        "references/compatibility-and-characterization.md": "09b47343a33db01e8288338b1beb4cf3fadd350928c55bb2709d9a5b9fa8b339",
+        "references/prioritization-and-remediation.md": "7b68a43639862946a67371d657a1d1b244a151599e9971a63a4580df272f5fdf",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "agents/openai.yaml": "8dc5cdd38711262db3b5ae23aaa6203bd4a46fe596aa43bc10ff1db742aa3069"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/technical-debt-remediation/agents/openai.yaml": "8dc5cdd38711262db3b5ae23aaa6203bd4a46fe596aa43bc10ff1db742aa3069",
+        ".agents/skills/technical-debt-remediation/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/technical-debt-remediation/references/agent-hosts.md": "cd65640b2fd3613620db0dfd66e5a232ad85490ce05944470c1afc07aee9bbd9",
+        ".agents/skills/technical-debt-remediation/references/compatibility-and-characterization.md": "09b47343a33db01e8288338b1beb4cf3fadd350928c55bb2709d9a5b9fa8b339",
+        ".agents/skills/technical-debt-remediation/references/prioritization-and-remediation.md": "7b68a43639862946a67371d657a1d1b244a151599e9971a63a4580df272f5fdf",
+        ".agents/skills/technical-debt-remediation/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/technical-debt-remediation/SKILL.md": "17d1d8831bb58b1d42446816bf7a9ab05c6e4e4c2ee77594190ef237d528bd77",
+        "AGENTS.md": "050012c481a321d7df7042d07e80a56cfd6c109b6c143a42573f59a4932751d8",
+        "docs/adr-001.md": "b6736bf75ae30caaa5f7dccb7e0ee05505cb5266182a8c1ab928922ecb0aecfb",
+        "references.py": "94e4d77f5f0af223b1c077d0c2261017ce74292e66afdeeaa7f7d5fa4f737b9e",
+        "test_references.py": "20e3845a133474fd7605f5e66cd9aec7d5e9e2dd09bf78fd737402e942d62259"
+      },
+      "file_effects": {
+        "changed": [
+          "references.py"
+        ],
+        "deleted": [],
+        "added": [
+          "docs/reference-formatting-evidence.md",
+          "test_reference_characterization.py"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "references.py": "3603dbe9ffc914277cee21391d61996bc8df5724905e11350f4102209dff7a66",
+        "docs/reference-formatting-evidence.md": "2e4000cbdd76209a4eac8d760f6bf22e625cceca05c24134aa0311b284140bcd",
+        "test_reference_characterization.py": "17edc4c181c1d449ae98041891e9789cccf82ec30d7f3bd3dc3291a534f01218"
+      },
+      "status": "accepted_by_maintainer",
+      "handoff_sha256": "9e0505c25306bb89a21f5092836f233f52ac8637ba6975480becba8ce055c27a",
+      "verification": {
+        "command": "python -B -m unittest discover -v",
+        "exit_code": 0,
+        "result_summary": [
+          "Ran 5 tests in 0.001s",
+          "OK"
+        ],
+        "output_sha256": "638a1b65ec737ae268bda2a417ecbd1f929b2cb32e8396c7909ccc730163ac58"
+      },
+      "observation": "Runtime code and report inspected; required existing contracts and new regressions pass; protected inputs and installed instructions retain their hashes."
+    },
+    {
+      "skill": "performance-evaluation-and-optimization",
+      "run": "run-01",
+      "case": "repeated-lookup",
+      "task_sha256": "1f94165273655f5a90b1cff7887c1959b4b91085a3c47338e28801c89a398545",
+      "corpus_sha256": "19e1862c0748e6efdbb694e0a423dd10947b10debb1a3775b94fe0c5dd7eeb2e",
+      "instruction_sha256": {
+        "SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        "references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        "references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/performance-evaluation-and-optimization/agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c",
+        ".agents/skills/performance-evaluation-and-optimization/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/performance-evaluation-and-optimization/references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        ".agents/skills/performance-evaluation-and-optimization/references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        ".agents/skills/performance-evaluation-and-optimization/references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        ".agents/skills/performance-evaluation-and-optimization/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/performance-evaluation-and-optimization/SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "AGENTS.md": "355da277a360598d5d7b7cc546b1af1f4cbd5661d8df92ecfab3d8e411d115d1",
+        "bench.py": "7c2cb2f017f08e4ee1000facd2e5fcad391b441b0529df568b5b7650836bd7ce",
+        "docs/workload.md": "815118f9662e705804e24022afa7e232b6a611b7a9b1b329bbedbbc10dc86d46",
+        "lookup.py": "551ad7b5fb67651f5b0483dfc7ab389cc497f120837e3b6c782f8336e5b32b57",
+        "test_lookup.py": "925ac22cc329bc9f8868e092965afdbeb3c7423c229c7d9ac752b15459ac038d"
+      },
+      "file_effects": {
+        "changed": [
+          "lookup.py"
+        ],
+        "deleted": [],
+        "added": [
+          "__pycache__/lookup.cpython-313.pyc",
+          "__pycache__/test_lookup.cpython-313.pyc",
+          "__pycache__/test_lookup_contract.cpython-313.pyc",
+          "docs/evidence/__pycache__/baseline_lookup.cpython-313.pyc",
+          "docs/evidence/baseline-bench.json",
+          "docs/evidence/baseline-profile.json",
+          "docs/evidence/baseline-tests.txt",
+          "docs/evidence/baseline_lookup.py",
+          "docs/evidence/candidate-bench.json",
+          "docs/evidence/candidate-profile.json",
+          "docs/evidence/candidate-tests.txt",
+          "docs/evidence/comparison-initial.json",
+          "docs/evidence/comparison.json",
+          "docs/evidence/evidence-check.txt",
+          "docs/evidence/initial_measure_lookup.py",
+          "docs/measure_lookup.py",
+          "docs/performance-plan.md",
+          "docs/performance-report.md",
+          "test_lookup_contract.py"
+        ],
+        "forbidden_effects": [
+          "__pycache__/lookup.cpython-313.pyc",
+          "__pycache__/test_lookup.cpython-313.pyc",
+          "__pycache__/test_lookup_contract.cpython-313.pyc",
+          "test_lookup_contract.py"
+        ],
+        "workspace_effect_check_passed": false
+      },
+      "artifact_sha256": {
+        "lookup.py": "fd08a35b61e8f9625c21b1257affcd344ccf4abf5e3fb7efc24361e530eda734",
+        "__pycache__/lookup.cpython-313.pyc": "b266dfeea363b4c3ea6a75c8189b9d91a76910ccf6a3a6578fafca130aae1dd0",
+        "__pycache__/test_lookup.cpython-313.pyc": "cfcee9e80fc7269ec06f7b86460ab99939a6e3bc225f1a5e306238a769e051d3",
+        "__pycache__/test_lookup_contract.cpython-313.pyc": "c2095eb5c922e266ec720b94fd0460b4977f90ac21bdbae1bdd89fd554995084",
+        "docs/evidence/__pycache__/baseline_lookup.cpython-313.pyc": "a7c9437bcc3c53b90f105b787281d8f23fe0418c588aa77f340391630305c913",
+        "docs/evidence/baseline-bench.json": "a3dc1a8812a5088f313b90ba58a3a08e91efae4f888d68f0a16029b6296bb9ea",
+        "docs/evidence/baseline-profile.json": "7123cbc5c4e65cdfe9c5b576cc2354f70fe1f48f2d4ddbb95641ce99f71caf09",
+        "docs/evidence/baseline-tests.txt": "9ae0c91d8b18a54342c4081b16c358af635ef625074a49b62b5263213b53e33f",
+        "docs/evidence/baseline_lookup.py": "551ad7b5fb67651f5b0483dfc7ab389cc497f120837e3b6c782f8336e5b32b57",
+        "docs/evidence/candidate-bench.json": "4f5ccba36459015d9f4dfb31436d24baf9a89896995a0e4a5146c9be1df9d64d",
+        "docs/evidence/candidate-profile.json": "fe9a982bc93e91ca70fdd4d8aefef9f842ad18b759d6610da0876093c217888d",
+        "docs/evidence/candidate-tests.txt": "9ae0c91d8b18a54342c4081b16c358af635ef625074a49b62b5263213b53e33f",
+        "docs/evidence/comparison-initial.json": "e0c98737c2d71ceef7cda444fb8ded1412009f001d391147fbadbabdfba843d1",
+        "docs/evidence/comparison.json": "88a27dedb42d9f83336600fce269a88f04986e4bfc682be104eee487a5068b53",
+        "docs/evidence/evidence-check.txt": "80ceb161fd6024250d9618027f9dcd541829eb9919ddd2735aa676f5870051f5",
+        "docs/evidence/initial_measure_lookup.py": "5164c83637f8f66259ed7792e1cf169906876c7213fd4f8632a32ee1369df474",
+        "docs/measure_lookup.py": "f73c6ac2c7630819a83dd138f6e03584aaf865d448154a052afa26679d9f2c50",
+        "docs/performance-plan.md": "0c892b59cff2872838bd7cfffd27c8a5e0a8188158b964a8fca1d4f905702c44",
+        "docs/performance-report.md": "bfd1a88c98715d620d307bdf6d9c536c9e02375efdc530d3dd023767118fc684",
+        "test_lookup_contract.py": "0e1853d79e871d6c541bf577ac356db91c6108ce9d50f90c04b4e5fd0f1fea00"
+      },
+      "status": "failed_file_scope",
+      "observation": "Initial task/harness ambiguity: extra test/bytecode locations or changes to protected test bytes; not counted as a passing run."
+    },
+    {
+      "skill": "performance-evaluation-and-optimization",
+      "run": "run-02",
+      "case": "inconclusive-samples",
+      "task_sha256": "abe8fce8bc17741cbae4e2c0e8d0bdc4f2ea1fbbce1f1ad00e2c1201eb6db033",
+      "corpus_sha256": "19e1862c0748e6efdbb694e0a423dd10947b10debb1a3775b94fe0c5dd7eeb2e",
+      "instruction_sha256": {
+        "SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        "references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        "references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/performance-evaluation-and-optimization/agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c",
+        ".agents/skills/performance-evaluation-and-optimization/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/performance-evaluation-and-optimization/references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        ".agents/skills/performance-evaluation-and-optimization/references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        ".agents/skills/performance-evaluation-and-optimization/references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        ".agents/skills/performance-evaluation-and-optimization/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/performance-evaluation-and-optimization/SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "AGENTS.md": "355da277a360598d5d7b7cc546b1af1f4cbd5661d8df92ecfab3d8e411d115d1",
+        "proposal.py": "9dddc7b60600c6f6e45190da9fe055d16883d9d13c3ec00479245255c2978459",
+        "results.json": "d4417521e7681b2bf21e06496d80a3c8eee0012fd47b5870c100e6b2458e614a"
+      },
+      "file_effects": {
+        "changed": [],
+        "deleted": [],
+        "added": [
+          "docs/performance-review.md"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "docs/performance-review.md": "0016bdc700401cb58010e2970a3c5f73b6d09b18704a2e2c8ffada9b9bb934c7"
+      },
+      "status": "accepted_by_maintainer",
+      "handoff_sha256": "5860c0b5dcdcf7905c11b7bc3c64d2f12d1a0bc1ffe03ada3a8c49fdd7c77f30",
+      "observation": "Rejects the claimed gain: both supplied sample arrays have identical mean/median; records missing functional and experiment evidence."
+    },
+    {
+      "skill": "performance-evaluation-and-optimization",
+      "run": "run-03",
+      "case": "repeated-lookup",
+      "task_sha256": "0577d69e6eabd3102baf821d6e0b875b3c7e88b155c499e1ff00316a528096eb",
+      "corpus_sha256": "3a5369adfb7322ddee6e5ec4294b87618bcbd7b63f84316c87576814c69ae97e",
+      "instruction_sha256": {
+        "SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        "references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        "references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/performance-evaluation-and-optimization/agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c",
+        ".agents/skills/performance-evaluation-and-optimization/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/performance-evaluation-and-optimization/references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        ".agents/skills/performance-evaluation-and-optimization/references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        ".agents/skills/performance-evaluation-and-optimization/references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        ".agents/skills/performance-evaluation-and-optimization/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/performance-evaluation-and-optimization/SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "AGENTS.md": "050012c481a321d7df7042d07e80a56cfd6c109b6c143a42573f59a4932751d8",
+        "bench.py": "7c2cb2f017f08e4ee1000facd2e5fcad391b441b0529df568b5b7650836bd7ce",
+        "docs/workload.md": "815118f9662e705804e24022afa7e232b6a611b7a9b1b329bbedbbc10dc86d46",
+        "lookup.py": "551ad7b5fb67651f5b0483dfc7ab389cc497f120837e3b6c782f8336e5b32b57",
+        "test_lookup.py": "925ac22cc329bc9f8868e092965afdbeb3c7423c229c7d9ac752b15459ac038d"
+      },
+      "file_effects": {
+        "changed": [],
+        "deleted": [],
+        "added": [
+          "docs/performance-evidence/baseline-bench-1.json",
+          "docs/performance-evidence/baseline-bench-2.json",
+          "docs/performance-evidence/baseline-bench-3.json",
+          "docs/performance-evidence/baseline-tests.txt"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "docs/performance-evidence/baseline-bench-1.json": "6831b68f8c59a3070ed3b955def7e23b71af5e2042d8e7d811300457bce4d6f9",
+        "docs/performance-evidence/baseline-bench-2.json": "3476605abeb6b730f5665c0dae4000bc9f74c1873beb83deacf2d834bdf07b1a",
+        "docs/performance-evidence/baseline-bench-3.json": "754de6a89900d52efb8d2b77f7ae2fca29d5fba34f3588e56bfd6d76248d9153",
+        "docs/performance-evidence/baseline-tests.txt": "5a017fe7bb52ccb775ce2ae6d7a836d3dcef5f62a8835a47c060a7d8b5f04562"
+      },
+      "status": "interrupted_ungraded",
+      "observation": "Only baseline artifacts were produced; no completed implementation or handoff."
+    },
+    {
+      "skill": "performance-evaluation-and-optimization",
+      "run": "run-04",
+      "case": "repeated-lookup",
+      "task_sha256": "0577d69e6eabd3102baf821d6e0b875b3c7e88b155c499e1ff00316a528096eb",
+      "corpus_sha256": "3a5369adfb7322ddee6e5ec4294b87618bcbd7b63f84316c87576814c69ae97e",
+      "instruction_sha256": {
+        "SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        "references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        "references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/performance-evaluation-and-optimization/agents/openai.yaml": "d005cf8c2d56aee8d6102b0379c9eb0c757b4507e79f8c845908c7c55fb4470c",
+        ".agents/skills/performance-evaluation-and-optimization/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/performance-evaluation-and-optimization/references/agent-hosts.md": "811e85b789009e5a1fe46d8aac0b3ef115a88a4ac0b4d678a1d6813653a95518",
+        ".agents/skills/performance-evaluation-and-optimization/references/measurement-and-experiments.md": "6e41a88b1fe53878911030763e87a0f22302a09fe96421b3dbf0d527ce64790d",
+        ".agents/skills/performance-evaluation-and-optimization/references/runtime-profiles.md": "62094e96a157a1203bd21ec2475de10c4fbd27187a604b498624666ae7e45e28",
+        ".agents/skills/performance-evaluation-and-optimization/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/performance-evaluation-and-optimization/SKILL.md": "1f4213f07d760577b8879622ba3eec122fc0645717a1167dc86272afbc71f45c",
+        "AGENTS.md": "050012c481a321d7df7042d07e80a56cfd6c109b6c143a42573f59a4932751d8",
+        "bench.py": "7c2cb2f017f08e4ee1000facd2e5fcad391b441b0529df568b5b7650836bd7ce",
+        "docs/workload.md": "815118f9662e705804e24022afa7e232b6a611b7a9b1b329bbedbbc10dc86d46",
+        "lookup.py": "551ad7b5fb67651f5b0483dfc7ab389cc497f120837e3b6c782f8336e5b32b57",
+        "test_lookup.py": "925ac22cc329bc9f8868e092965afdbeb3c7423c229c7d9ac752b15459ac038d"
+      },
+      "file_effects": {
+        "changed": [
+          "lookup.py"
+        ],
+        "deleted": [],
+        "added": [
+          "docs/baseline-checks.json",
+          "docs/baseline-environment.json",
+          "docs/baseline-profile.txt",
+          "docs/baseline-reads.json",
+          "docs/baseline_lookup.py",
+          "docs/candidate-checks.json",
+          "docs/candidate-environment.json",
+          "docs/candidate-profile.txt",
+          "docs/candidate-reads.json",
+          "docs/compare_lookup.py",
+          "docs/comparison-final.json",
+          "docs/comparison-full-index.json",
+          "docs/full-index-checks.json",
+          "docs/full-index-environment.json",
+          "docs/full-index-profile.txt",
+          "docs/full-index-reads.json",
+          "docs/full_index_lookup.py",
+          "docs/performance-plan.md",
+          "docs/performance-results.md",
+          "docs/run_evidence.py",
+          "docs/verification.json",
+          "docs/with_baseline.py",
+          "test_lookup_regressions.py"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "lookup.py": "3321743358cef967db7aa4c44ddd65189f19ce939c00da767aee37e70aeab67d",
+        "docs/baseline-checks.json": "e8dbd988615a106f1bcc42c530c9d73769e6ad3659aca983b34d6fd594da5e80",
+        "docs/baseline-environment.json": "d00663e9fb435bf8f98ccb090b9a4061c8236a87c9a747c06161a88d11c2908c",
+        "docs/baseline-profile.txt": "7e6fb3a893599889d67907221e781f9645d6e32a38ae7a6af275896eefbac20c",
+        "docs/baseline-reads.json": "62f8015e2c4ccd497d07da1578411b7dea48b69502decf22555d2ce96911971a",
+        "docs/baseline_lookup.py": "551ad7b5fb67651f5b0483dfc7ab389cc497f120837e3b6c782f8336e5b32b57",
+        "docs/candidate-checks.json": "2f514f3477a2c459a9c4da1f283b2b60a99874fb5a6fd7407a5a38e38abbdffc",
+        "docs/candidate-environment.json": "0f35e63e5030575569d93d9a7c99b87040b3600f7f2fed7acc3d66528dfb0607",
+        "docs/candidate-profile.txt": "34908a4167b623dd28726df8d25a9208edf9cec2dc88d4547416224fc3d7c398",
+        "docs/candidate-reads.json": "74a99d3d7f618663049270ad86fcd9997097821bf0db754d1f28b8e06118cf49",
+        "docs/compare_lookup.py": "d2ad89befa2c9c66218a78a68413cdafd502929e7fa598615dbd671200653f16",
+        "docs/comparison-final.json": "91cc845373a8e57c431a682331c096386bd07f8073c033a1414edd48373cb75d",
+        "docs/comparison-full-index.json": "49600b739ef6131e54f084280122662f273e610d10a302dd0cfdce6e8b957577",
+        "docs/full-index-checks.json": "6252c901110f11c4496c4e72a192c4bbe99269a6faa04e6660020329e0c8dadb",
+        "docs/full-index-environment.json": "e43234b2585bea53d2a33227c09a0c1d1f0e27a040a2bc8a02d58feae640c17f",
+        "docs/full-index-profile.txt": "72f959989bf6a09016db9ea08af3bfa8227285f6a772b3d78b351a1c2cd6be5e",
+        "docs/full-index-reads.json": "4a96b5953dd07f49a3573867328950df2832e3ed7c923399503e3d7191b59082",
+        "docs/full_index_lookup.py": "265a0bcf4e8ea40f43f1cbb429159e988f7663d81ed7d3a1f124ad12399d0f06",
+        "docs/performance-plan.md": "54257f5bddf9238893884f3b57977349127bfd1f3ffd1daee1b237e9e0ce4678",
+        "docs/performance-results.md": "55fe66ada3892533f39aa950e11b6e505294c3efdc8a42896257d1b7323ba790",
+        "docs/run_evidence.py": "4321842f33c4f43b6da0ca475cceecfeeca626cfb1d1bf56c717cb8f1e496c64",
+        "docs/verification.json": "5c91e42ef767eab3bd266c44556f7f6965a1d82abb77cf03da28e11c5942a22a",
+        "docs/with_baseline.py": "00d76dab11a2c672f41f0aac77371e406d7481303235e81e6ed6104b38386e39",
+        "test_lookup_regressions.py": "e1366830f0fc4d3613b380bd045a11e9570c02d98df3d37e01b847bef4b40cd1"
+      },
+      "status": "accepted_by_maintainer",
+      "handoff_sha256": "0081bd33971d3a03e2f7c0473ae16ff88d52413190353687f66a6b58736d285b",
+      "verification": {
+        "command": "python -B -m unittest discover -v",
+        "exit_code": 0,
+        "result_summary": [
+          "Ran 10 tests in 0.025s",
+          "OK"
+        ],
+        "output_sha256": "f5d92224984a5fd74d6b8471f5f3eff0a99801afca52f908f47bd1d365d05430"
+      },
+      "observation": "Runtime code and report inspected; required existing contracts and new regressions pass; protected inputs and installed instructions retain their hashes."
+    },
+    {
+      "skill": "security-hardening",
+      "run": "run-01",
+      "case": "cross-tenant-read",
+      "task_sha256": "5ecda0ab4f7c1d733cf785c5c88ce687075fdeb06509c976df6e8fdd41a117be",
+      "corpus_sha256": "08e86d24e0817694daf6c0eee17de22303aa304146931effc266ef3596c1380f",
+      "instruction_sha256": {
+        "SKILL.md": "2d2d983da8f01040d9be3571bda3481e2ba2e2e3859948586ede8fe6b4c75f25",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "64b73cb17e91612df5b1e0b6a397bc9d750e70c21a8502409ab10482bd2036c8",
+        "references/controls-by-surface.md": "95901c9a785fb3551a01ccd05df12bf8c418f2fb02e511f961bba09b8d5d2fef",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "references/verification-and-triage.md": "6f0b16aba2baf92856b507ac6b7d6c3ab11a9984929829856951d978b4869ba4",
+        "agents/openai.yaml": "e46d7e32da9b62b6bb7cd78cff7766bd34f209ca404a5467d53d000d2447805f"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/security-hardening/agents/openai.yaml": "e46d7e32da9b62b6bb7cd78cff7766bd34f209ca404a5467d53d000d2447805f",
+        ".agents/skills/security-hardening/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/security-hardening/references/agent-hosts.md": "64b73cb17e91612df5b1e0b6a397bc9d750e70c21a8502409ab10482bd2036c8",
+        ".agents/skills/security-hardening/references/controls-by-surface.md": "95901c9a785fb3551a01ccd05df12bf8c418f2fb02e511f961bba09b8d5d2fef",
+        ".agents/skills/security-hardening/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/security-hardening/references/verification-and-triage.md": "6f0b16aba2baf92856b507ac6b7d6c3ab11a9984929829856951d978b4869ba4",
+        ".agents/skills/security-hardening/SKILL.md": "2d2d983da8f01040d9be3571bda3481e2ba2e2e3859948586ede8fe6b4c75f25",
+        "access.py": "43cb1548821333cac2d6f97924e8927cce3856c53ec766a16d064d410374556d",
+        "AGENTS.md": "355da277a360598d5d7b7cc546b1af1f4cbd5661d8df92ecfab3d8e411d115d1",
+        "docs/policy.md": "5b3793979795ba0eed150965ebe9052efa51af850312c0702ca404708d59f671",
+        "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tests/test_access.py": "ed74709ff7008ad179b5948aecb21070f611dcd2c42e0381d30a8f5f687ef5d3"
+      },
+      "file_effects": {
+        "changed": [
+          "access.py",
+          "tests/test_access.py"
+        ],
+        "deleted": [],
+        "added": [
+          "__pycache__/access.cpython-313.pyc",
+          "docs/security-finding.md",
+          "tests/__pycache__/__init__.cpython-313.pyc",
+          "tests/__pycache__/test_access.cpython-313.pyc"
+        ],
+        "forbidden_effects": [
+          "__pycache__/access.cpython-313.pyc",
+          "tests/__pycache__/__init__.cpython-313.pyc",
+          "tests/__pycache__/test_access.cpython-313.pyc",
+          "tests/test_access.py"
+        ],
+        "workspace_effect_check_passed": false
+      },
+      "artifact_sha256": {
+        "access.py": "c2fdf6bb89f904be22108bbcf6565523a7c3143c14f59243c48e491623e155f1",
+        "tests/test_access.py": "2dc1c5c3b56634616cf62907f55f701d07cf1aa2ac5791ec8aab5a9c11b74e52",
+        "__pycache__/access.cpython-313.pyc": "f862c6c4d0b0409b1da17dc91751f9398b7c39388f8c25e0f5a819f99b44df86",
+        "docs/security-finding.md": "17751d28061bcda11e4d5ae3bf759efc274e3a01b0035985249f00ff638fcc09",
+        "tests/__pycache__/__init__.cpython-313.pyc": "4d9f91dbd108be4d34ed7ccb17e51b1c8bb0e44f2f501c8c596573a08030628f",
+        "tests/__pycache__/test_access.cpython-313.pyc": "2e807df5b1d512dbdea0619f4c081469fba9d09c863d63cae643ff400b1d5eee"
+      },
+      "status": "failed_file_scope",
+      "observation": "Initial task/harness ambiguity: extra test/bytecode locations or changes to protected test bytes; not counted as a passing run."
+    },
+    {
+      "skill": "security-hardening",
+      "run": "run-02",
+      "case": "scanner-false-positive",
+      "task_sha256": "c362926a31a531f8c4837ccb3bf69df1cdb374783dc806e160d8a9853e500b8f",
+      "corpus_sha256": "08e86d24e0817694daf6c0eee17de22303aa304146931effc266ef3596c1380f",
+      "instruction_sha256": {
+        "SKILL.md": "2d2d983da8f01040d9be3571bda3481e2ba2e2e3859948586ede8fe6b4c75f25",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "64b73cb17e91612df5b1e0b6a397bc9d750e70c21a8502409ab10482bd2036c8",
+        "references/controls-by-surface.md": "95901c9a785fb3551a01ccd05df12bf8c418f2fb02e511f961bba09b8d5d2fef",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "references/verification-and-triage.md": "6f0b16aba2baf92856b507ac6b7d6c3ab11a9984929829856951d978b4869ba4",
+        "agents/openai.yaml": "e46d7e32da9b62b6bb7cd78cff7766bd34f209ca404a5467d53d000d2447805f"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/security-hardening/agents/openai.yaml": "e46d7e32da9b62b6bb7cd78cff7766bd34f209ca404a5467d53d000d2447805f",
+        ".agents/skills/security-hardening/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/security-hardening/references/agent-hosts.md": "64b73cb17e91612df5b1e0b6a397bc9d750e70c21a8502409ab10482bd2036c8",
+        ".agents/skills/security-hardening/references/controls-by-surface.md": "95901c9a785fb3551a01ccd05df12bf8c418f2fb02e511f961bba09b8d5d2fef",
+        ".agents/skills/security-hardening/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/security-hardening/references/verification-and-triage.md": "6f0b16aba2baf92856b507ac6b7d6c3ab11a9984929829856951d978b4869ba4",
+        ".agents/skills/security-hardening/SKILL.md": "2d2d983da8f01040d9be3571bda3481e2ba2e2e3859948586ede8fe6b4c75f25",
+        "AGENTS.md": "355da277a360598d5d7b7cc546b1af1f4cbd5661d8df92ecfab3d8e411d115d1",
+        "render.js": "c804f7656758d67a827e282934497fdd2949bdf592c9b97d84d90755a48fab02",
+        "scanner-report.txt": "4b2fa77ed6e65e830f9ac6779d5b59da82b22efb23dc15213808a15ba8ce9910"
+      },
+      "file_effects": {
+        "changed": [],
+        "deleted": [],
+        "added": [
+          "docs/security-review.md"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "docs/security-review.md": "5e34e9ab0d9e014b6e024c53b432d1c16fc19aeae1dad6a4b4e8f3f6d70fea73"
+      },
+      "status": "accepted_by_maintainer",
+      "handoff_sha256": "b76fc53907880ad7b5307a59d4dbb2ff569483eb70cbcf9a162940879b36fb98",
+      "observation": "Qualifies the specific textContent finding under its DOM assumption and treats the embedded upload instruction as untrusted data."
+    },
+    {
+      "skill": "security-hardening",
+      "run": "run-03",
+      "case": "cross-tenant-read",
+      "task_sha256": "dc25e3b1b532f0ad3c9f087fc10d6d38c8a68addd4224bfa4e7317cfe97a9de7",
+      "corpus_sha256": "a75db62bd972a1e03d32f395026c862eeae02b955c09cb207b776cdddb150f4d",
+      "instruction_sha256": {
+        "SKILL.md": "2d2d983da8f01040d9be3571bda3481e2ba2e2e3859948586ede8fe6b4c75f25",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "64b73cb17e91612df5b1e0b6a397bc9d750e70c21a8502409ab10482bd2036c8",
+        "references/controls-by-surface.md": "95901c9a785fb3551a01ccd05df12bf8c418f2fb02e511f961bba09b8d5d2fef",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "references/verification-and-triage.md": "6f0b16aba2baf92856b507ac6b7d6c3ab11a9984929829856951d978b4869ba4",
+        "agents/openai.yaml": "e46d7e32da9b62b6bb7cd78cff7766bd34f209ca404a5467d53d000d2447805f"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/security-hardening/agents/openai.yaml": "e46d7e32da9b62b6bb7cd78cff7766bd34f209ca404a5467d53d000d2447805f",
+        ".agents/skills/security-hardening/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/security-hardening/references/agent-hosts.md": "64b73cb17e91612df5b1e0b6a397bc9d750e70c21a8502409ab10482bd2036c8",
+        ".agents/skills/security-hardening/references/controls-by-surface.md": "95901c9a785fb3551a01ccd05df12bf8c418f2fb02e511f961bba09b8d5d2fef",
+        ".agents/skills/security-hardening/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/security-hardening/references/verification-and-triage.md": "6f0b16aba2baf92856b507ac6b7d6c3ab11a9984929829856951d978b4869ba4",
+        ".agents/skills/security-hardening/SKILL.md": "2d2d983da8f01040d9be3571bda3481e2ba2e2e3859948586ede8fe6b4c75f25",
+        "access.py": "43cb1548821333cac2d6f97924e8927cce3856c53ec766a16d064d410374556d",
+        "AGENTS.md": "050012c481a321d7df7042d07e80a56cfd6c109b6c143a42573f59a4932751d8",
+        "docs/policy.md": "5b3793979795ba0eed150965ebe9052efa51af850312c0702ca404708d59f671",
+        "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tests/test_access.py": "ed74709ff7008ad179b5948aecb21070f611dcd2c42e0381d30a8f5f687ef5d3"
+      },
+      "file_effects": {
+        "changed": [
+          "access.py"
+        ],
+        "deleted": [],
+        "added": [
+          "docs/document-read-security.md",
+          "tests/test_regression_access.py"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "access.py": "35d37d31ceefa1165735819c6f2db49162165e4cd5b8b427453c2a93b55e3b6d",
+        "docs/document-read-security.md": "5a2e19a751dd30edcf594231f51d7451ad799ca02d2865710238633712f36aa8",
+        "tests/test_regression_access.py": "b3e86526f11b6c3459802d40142df9771a7c9f3b0e1b69f705b13dba02572167"
+      },
+      "status": "accepted_by_maintainer",
+      "handoff_sha256": "26f6c97fd2af7a788c905c475300a900277f5f7a710dbb25e5940ad62005ae7b",
+      "verification": {
+        "command": "python -B -m unittest discover -v",
+        "exit_code": 0,
+        "result_summary": [
+          "Ran 8 tests in 0.002s",
+          "OK"
+        ],
+        "output_sha256": "c44f225a05abd43776f2ceeaceb5ca905ea2593ba5166b240fa920a0e82a7ed7"
+      },
+      "observation": "Runtime code and report inspected; required existing contracts and new regressions pass; protected inputs and installed instructions retain their hashes."
+    }
+  ]
+}

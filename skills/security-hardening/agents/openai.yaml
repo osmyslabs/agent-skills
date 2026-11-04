@@ -1,0 +1,5 @@
+# Optional OpenAI host metadata; common instructions live in SKILL.md.
+interface:
+  display_name: "Security Hardening"
+  short_description: "Assess risks and verify targeted security improvements"
+  default_prompt: "Use $security-hardening to assess the authorized surface and verify targeted security improvements within the requested scope."

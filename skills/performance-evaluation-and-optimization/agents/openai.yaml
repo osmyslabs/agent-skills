@@ -1,0 +1,5 @@
+# Optional OpenAI host metadata; common instructions live in SKILL.md.
+interface:
+  display_name: "Performance Evaluation and Optimization"
+  short_description: "Measure bottlenecks and verify performance improvements"
+  default_prompt: "Use $performance-evaluation-and-optimization to investigate the performance constraint and verify any authorized optimization with reproducible measurements."

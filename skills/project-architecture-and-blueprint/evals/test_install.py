@@ -29,12 +29,12 @@ class InstallTests(unittest.TestCase):
     def test_exact_portable_copy_for_all_host_and_scope_profiles(self):
         expected = {p.relative_to(self.source): p.read_bytes() for p in self.source.rglob("*") if p.is_file()}
         locations = {
-            ("codex", "project"): ".agents/skills/project-architecture-and-blueprint",
-            ("codex", "user"): ".agents/skills/project-architecture-and-blueprint",
-            ("claude", "project"): ".claude/skills/project-architecture-and-blueprint",
-            ("claude", "user"): ".claude/skills/project-architecture-and-blueprint",
-            ("copilot", "project"): ".github/skills/project-architecture-and-blueprint",
-            ("copilot", "user"): ".copilot/skills/project-architecture-and-blueprint",
+            ("codex", "project"): f".agents/skills/{SKILL_NAME}",
+            ("codex", "user"): f".agents/skills/{SKILL_NAME}",
+            ("claude", "project"): f".claude/skills/{SKILL_NAME}",
+            ("claude", "user"): f".claude/skills/{SKILL_NAME}",
+            ("copilot", "project"): f".github/skills/{SKILL_NAME}",
+            ("copilot", "user"): f".copilot/skills/{SKILL_NAME}",
         }
         for agent in HOSTS:
             for scope in ("project", "user"):

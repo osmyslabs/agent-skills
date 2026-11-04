@@ -19,11 +19,15 @@ Run from the repository root:
 
 ```text
 python -B scripts/verify.py
-python -B skills/project-architecture-and-blueprint/evals/prepare.py --validate
-python -B skills/project-architecture-and-blueprint/evals/test_prepare.py
-python -B skills/project-architecture-and-blueprint/evals/test_install.py
+python -B scripts/check.py
 ```
 
 Keep temporary installations and test outputs under ignored build/ or a temporary
 directory. Do not install missing AI clients, call paid models, link accounts,
 deploy or publish a release merely because a fixture describes those actions.
+
+Each skill must remain independently installable with its MIT notice and local
+references. scripts/install.py is the maintained generic installer; copy its exact
+bytes into every package after changing it. Preserve existing package commands.
+Catalog checks discover skills/ directories; each must appear in README.md and
+llms.txt. See docs/catalog-design.md for boundaries and helper maintenance.

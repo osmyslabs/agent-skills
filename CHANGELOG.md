@@ -1,7 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 — 2026-11-04
 
+- Add technical-debt-remediation, performance-evaluation-and-optimization and
+  security-hardening with conditional references and four synthetic cases each.
+- Discover every package in CI and allow explicit repository installer selection
+  while preserving standalone installers and byte-identical package copies.
 - Add an optional root llms.txt documentation index with raw Markdown links and
   offline validation of its repository targets. No automatic discovery or search
   indexing guarantee is implied.

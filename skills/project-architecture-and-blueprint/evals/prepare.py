@@ -9,7 +9,7 @@ import shutil
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from install import HOSTS, installation_relative
+from install import HOSTS, installation_relative, invocation_for, manifest_name
 
 
 def digest(path):
@@ -58,8 +58,9 @@ def prepare(corpus_path, case_id, skill, output, host="codex"):
     selected = next((case for case in corpus["cases"] if case["id"] == case_id), None)
     if selected is None:
         raise ValueError(f"Unknown case: {case_id}")
-    installed_relative = installation_relative(host)
     skill = skill.resolve(strict=True)
+    skill_name = manifest_name(skill)
+    installed_relative = installation_relative(host, name=skill_name)
     output = output.resolve()
     if output.exists():
         raise ValueError("Output already exists; keep prior evidence and choose a fresh path")
@@ -95,7 +96,7 @@ def prepare(corpus_path, case_id, skill, output, host="codex"):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(content, encoding="utf-8", newline="\n")
     prompt = (
-        f"Use {HOSTS[host]['invocation']} from "
+        f"Use {invocation_for(host, skill_name)} from "
         f"{installed_relative.as_posix()}/SKILL.md to complete this task.\n\n"
         + selected["request"]
         + "\n\nEvaluation environment: operate only in this isolated workspace. "

@@ -11,7 +11,8 @@ import stat
 import sys
 from urllib.parse import unquote, urlsplit
 
-SKILL_NAME = "project-architecture-and-blueprint"
+PACKAGE = Path(__file__).resolve().parents[1]
+SKILL_NAME = PACKAGE.name if (PACKAGE / "SKILL.md").is_file() else "project-architecture-and-blueprint"
 HOSTS = {
     "codex": {
         "project": ".agents/skills", "user": ".agents/skills",
@@ -28,10 +29,29 @@ HOSTS = {
 }
 
 
-def installation_relative(agent, scope="project"):
+def validate_name(name):
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name) or len(name) > 64:
+        raise ValueError("Skill name must be a lowercase slug of at most 64 characters")
+    return name
+
+
+def manifest_name(source):
+    text = (source / "SKILL.md").read_text(encoding="utf-8")
+    header = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n", text, re.S)
+    name = re.search(r"(?m)^name: ([^\r\n]+)\r?$", header[1]) if header else None
+    if not name or not re.search(r"(?m)^description: \S[^\r\n]*\r?$", header[1]):
+        raise ValueError("Source manifest needs a canonical name and nonempty description")
+    return validate_name(name[1])
+
+
+def invocation_for(agent, name):
+    return {"codex": "$", "claude": "/", "copilot": ""}[agent] + validate_name(name)
+
+
+def installation_relative(agent, scope="project", name=SKILL_NAME):
     if agent not in HOSTS or scope not in ("project", "user"):
         raise ValueError("Select a documented agent and project/user scope")
-    return Path(HOSTS[agent][scope]) / SKILL_NAME
+    return Path(HOSTS[agent][scope]) / validate_name(name)
 
 
 def linked_path(path):
@@ -47,13 +67,7 @@ def linked_path(path):
 def package_files(source):
     """Check the complete relocatable package before writing a destination."""
     source = source.resolve(strict=True)
-    manifest = source / "SKILL.md"
-    text = manifest.read_text(encoding="utf-8")
-    header = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n", text, re.S)
-    if not header or not re.search(r"(?m)^name: " + re.escape(SKILL_NAME) + r"\r?$", header[1]):
-        raise ValueError("Source must contain this skill's manifest and canonical name")
-    if not re.search(r"(?m)^description: \S[^\r\n]*\r?$", header[1]):
-        raise ValueError("Source manifest needs a nonempty description")
+    manifest_name(source)
     files = []
     for path in sorted(source.rglob("*")):
         relative = path.relative_to(source)
@@ -84,7 +98,7 @@ def install_skill(source, root, agent, scope="project", dry_run=False):
     root = root.resolve(strict=True)
     if not root.is_dir():
         raise ValueError("Installation root must be an existing directory")
-    relative = installation_relative(agent, scope)
+    relative = installation_relative(agent, scope, manifest_name(source))
     destination = root / relative
     current = root
     for part in relative.parts:
@@ -117,12 +131,22 @@ def install_skill(source, root, agent, scope="project", dry_run=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    is_package = (PACKAGE / "SKILL.md").is_file()
+    parser.add_argument("--skill", required=not is_package, help="Catalog skill name; required from the repository installer")
     parser.add_argument("--agent", choices=HOSTS, required=True)
     parser.add_argument("--scope", choices=("project", "user"), default="project")
     parser.add_argument("--root", type=Path, required=True, help="Existing project directory or explicitly chosen user home")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(install_skill(Path(__file__).resolve().parents[1], args.root, args.agent, args.scope, args.dry_run), indent=2))
+    if is_package:
+        if args.skill and args.skill != SKILL_NAME:
+            parser.error("This package installer installs only its own skill")
+        source = PACKAGE
+    else:
+        source = PACKAGE / "skills" / validate_name(args.skill)
+        if linked_path(source):
+            raise ValueError("Catalog source cannot be a symlink or junction")
+    print(json.dumps(install_skill(source, args.root, args.agent, args.scope, args.dry_run), indent=2))
 
 
 if __name__ == "__main__":

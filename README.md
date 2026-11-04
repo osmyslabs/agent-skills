@@ -3,13 +3,16 @@
 Reusable engineering workflows for agents that support the open
 [Agent Skills format](https://agentskills.io/specification).
 
-**Status: experimental.** The first skill helps agents create and maintain an
-intentional architecture, record decisions and verify implementation without
-silently changing a project's scope or authority.
+**Status: experimental.** These skills support architecture and evidence-backed
+improvements within the requested scope. The four-skill catalog is distributed
+in the experimental v0.2.0 release; v0.1.0 contains the architecture skill only.
 
 | Skill | Use it for |
 | --- | --- |
 | [Project Architecture & Blueprint](skills/project-architecture-and-blueprint/SKILL.md) | Architecture baselines, researched decisions, bounded experiments, implementation contracts, drift analysis and evidence-backed roadmaps. |
+| [Technical Debt Remediation](skills/technical-debt-remediation/SKILL.md) | Prioritize demonstrated debt, preserve contracts and remediate a bounded slice or justify retention. |
+| [Performance Evaluation and Optimization](skills/performance-evaluation-and-optimization/SKILL.md) | Measure representative workloads, find bottlenecks and verify correctness-preserving improvements. |
+| [Security Hardening](skills/security-hardening/SKILL.md) | Triage findings, strengthen controls and verify abuse rejection and legitimate behavior. |
 
 The root [llms.txt](llms.txt) provides a concise documentation index with links to
 raw Markdown for AI tools that choose to use it. This follows the optional
@@ -41,25 +44,27 @@ git clone https://github.com/osmyslabs/agent-skills.git
 cd agent-skills
 ```
 
-Copy the complete `skills/project-architecture-and-blueprint` folder into the
+Copy the complete `skills/<skill-name>` folder for the selected skill into the
 location recognized by your host. Keep its `LICENSE`, references and resources
 together. For reproducible use, pin a reviewed commit or release tag and review
 upgrades before replacing a local copy.
 
 | Agent | Project location | Personal location | Invocation |
 | --- | --- | --- | --- |
-| Codex | `.agents/skills/project-architecture-and-blueprint/` | `~/.agents/skills/project-architecture-and-blueprint/` | `$project-architecture-and-blueprint` |
-| Claude Code | `.claude/skills/project-architecture-and-blueprint/` | `~/.claude/skills/project-architecture-and-blueprint/` | `/project-architecture-and-blueprint` |
-| GitHub Copilot | `.github/skills/project-architecture-and-blueprint/` | `~/.copilot/skills/project-architecture-and-blueprint/` | Ask to use the skill by name or explicit file. |
+| Codex | `.agents/skills/<skill-name>/` | `~/.agents/skills/<skill-name>/` | `$<skill-name>` |
+| Claude Code | `.claude/skills/<skill-name>/` | `~/.claude/skills/<skill-name>/` | `/<skill-name>` |
+| GitHub Copilot | `.github/skills/<skill-name>/` | `~/.copilot/skills/<skill-name>/` | Ask to use the skill by name or explicit file. |
 
 Alternatively, the local installer uses Python 3.10+ and only the standard library.
 Replace the example destination with an existing project directory:
 
 ```text
-python skills/project-architecture-and-blueprint/scripts/install.py --agent codex --root "<project-directory>" --dry-run
-python skills/project-architecture-and-blueprint/scripts/install.py --agent codex --root "<project-directory>"
+python scripts/install.py --skill technical-debt-remediation --agent codex --root "<project-directory>" --dry-run
+python scripts/install.py --skill technical-debt-remediation --agent codex --root "<project-directory>"
 ```
 
+Select any catalog name with `--skill`. Each package also retains its own
+standalone scripts/install.py, usable without the repository checkout.
 Use `--agent claude` or `--agent copilot` for another host. For personal use,
 add `--scope user` and explicitly pass the intended user home as `--root`.
 The installer refuses existing destinations and does not download anything,
@@ -82,10 +87,14 @@ Use your host's native skill command or identify its installed `SKILL.md` file.
 An agent without a skill loader can read the instructions and relevant references
 explicitly; automatic discovery and adherence are not guaranteed by the format.
 
+Choose the primary skill by the requested outcome and reuse existing finding
+records when categories overlap. Each skill is independently usable; see the
+[catalog design](docs/catalog-design.md) for boundaries and maintenance.
+
 ## Verification and limitations
 
-The repository includes 12 offline preparation/installation tests and eight
-synthetic task fixtures. They check package copying, scoped destinations,
+The repository includes 48 offline preparation/installation tests, three catalog
+integration tests and 20 synthetic task fixtures. They check package copying, scoped destinations,
 preservation of existing files and evaluation isolation. They do not execute
 models or prove architectural quality. Native Claude Code and Copilot behavior
 remain unverified; package placement does not certify every agent or cloud surface.
@@ -95,13 +104,11 @@ From the repository root, with Python 3.10+:
 
 ```text
 python -B scripts/verify.py
-python -B skills/project-architecture-and-blueprint/evals/prepare.py --validate
-python -B skills/project-architecture-and-blueprint/evals/test_prepare.py
-python -B skills/project-architecture-and-blueprint/evals/test_install.py
+python -B scripts/check.py
 ```
 
-The [evaluation guide](skills/project-architecture-and-blueprint/evals/README.md)
-explains isolated task preparation and grading. The CI runs offline checks on
+Each package's evals/README.md explains isolated task preparation and grading.
+The CI discovers every skill and runs offline checks on
 Linux and Windows. It never installs an AI client, calls a provider or evaluates
 a model's output.
 

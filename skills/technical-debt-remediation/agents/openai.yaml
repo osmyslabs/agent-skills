@@ -1,0 +1,5 @@
+# Optional OpenAI host metadata; common instructions live in SKILL.md.
+interface:
+  display_name: "Technical Debt Remediation"
+  short_description: "Prioritize and remediate demonstrated technical debt"
+  default_prompt: "Use $technical-debt-remediation to assess demonstrated technical debt and remediate the authorized slice while preserving required behavior."

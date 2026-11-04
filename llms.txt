@@ -1,8 +1,8 @@
 # Osmys Agent Skills
 
 > Experimental, MIT-licensed engineering workflows for agents that support the
-> open Agent Skills format. The current skill covers evidence-backed software
-> architecture, technical decisions, blueprints and implementation roadmaps.
+> open Agent Skills format. The catalog covers architecture, technical debt
+> remediation, measured performance optimization and security hardening.
 
 This index points to the current documentation on the main branch. For repeatable
 installation, select a reviewed release tag or commit and copy the complete skill
@@ -16,7 +16,13 @@ depend on the agent host; this index does not install or activate a skill.
 - [Agent hosts and portability](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/agent-hosts.md): Codex, Claude Code and GitHub Copilot placement and invocation conventions.
 - [Validation record](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/docs/validation.md): Checks actually performed, native-host evidence and compatibility limitations.
 
+- [Technical Debt Remediation skill](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/technical-debt-remediation/SKILL.md): Prioritize demonstrated debt and preserve contracts through bounded remediation.
+- [Performance Evaluation and Optimization skill](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/performance-evaluation-and-optimization/SKILL.md): Measure workloads, find causes and verify improvements.
+- [Security Hardening skill](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/security-hardening/SKILL.md): Triage findings and verify scoped controls.
+- [Catalog design](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/docs/catalog-design.md): Skill boundaries, independent installation and maintenance.
+
 ## Architecture references
+
 
 - [Blueprint documents and roadmaps](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/blueprint-documents.md): Adaptable documentation contracts and implementation tracking.
 - [Decision quality and experiments](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/decision-quality-and-experiments.md): Alternatives, uncertainty, bounded experiments and capacity/cost evidence.

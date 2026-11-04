@@ -1,6 +1,6 @@
 # Validation record
 
-Public catalog: four independently installable skills, experimental `v0.2.0`.
+Public catalog: four independently installable skills, experimental `v0.3.0`.
 Updated 4 November 2026, retaining the original 28 October checks below. This is
 a bounded verification record, not a claim of universal agent compatibility or
 production certification.
@@ -13,7 +13,7 @@ The commands in [README.md](../README.md#verification-and-limitations) verify:
   UTF-8 source files, Python syntax and local Markdown link containment. Owned
   raw-document URLs in the root llms.txt index are mapped to files in the current
   checkout and checked for existence and containment without network access.
-- Twenty synthetic evaluation cases and their preparation metadata: eight for
+- Twenty-two synthetic evaluation cases and their preparation metadata: ten for
   architecture and four for each improvement skill.
 - Six preparation tests per package covering instruction/license preservation,
   isolated output,
@@ -54,7 +54,7 @@ Markdown anchor. Helper tests do not execute an AI model or measure its quality.
 | Codex local skill discovery | Architecture discovery checked on 28 October and all four skills checked on 29 October 2026 with Codex CLI `0.165.0-alpha.1.2` on Windows in an isolated project via native `skills/list`. All were enabled without package loading errors. No task/model execution was part of this probe. |
 | Claude Code | Native client execution has not been tested. Folder placement and fixture preparation are tested offline; they do not establish discovery or adherence. |
 | GitHub Copilot | Native client execution has not been tested. Folder placement and fixture preparation are tested offline; they do not establish discovery or adherence. |
-| Behavioral evaluation | An isolated sample of implementation and negative cases for the three new skills is recorded in the [evaluation report](evaluation/quality-skills.md). The catalog contains 20 cases; this sample does not establish full-corpus coverage. CI does not execute tasks with a model. |
+| Behavioral evaluation | The [v0.2.0 evaluation report](evaluation/quality-skills.md) records six selected cases from that release's 20-case corpus. The [feature-mode report](evaluation/feature-integration.md) covers two added cases in v0.3.0. The current catalog has 22 cases; these samples do not establish full-corpus coverage. CI does not execute tasks with a model. |
 
 The Codex discovery probe used dedicated runtime state, without linking an
 account or starting a conversation. The client may attempt its own background

@@ -2,7 +2,7 @@
 
 Use when maintaining this skill, not during ordinary architecture tasks.
 Read [the evaluation protocol](../references/skill-evaluation.md) before grading.
-The [eight cases](cases.json) contain synthetic raw fixtures, user requests and
+The [ten cases](cases.json) contain synthetic raw fixtures, user requests and
 review criteria. They require no product repository, provider account or API key.
 
 Prepare a case from the repository root, selecting the instruction version:
@@ -58,3 +58,7 @@ Only execution by the named native client establishes that client's behavior.
 Profile preparation and unit tests do not establish Claude/Copilot runtime
 compatibility. Preserve client/version and actual availability in the run record;
 do not label a Codex solver as another agent merely because it uses that layout.
+
+The feature-cross-module-trace and feature-review-readonly cases exercise the
+integrated feature mode. The first permits a feature-oriented document; the
+second permits no workspace writes. Neither calls for project-wide governance.

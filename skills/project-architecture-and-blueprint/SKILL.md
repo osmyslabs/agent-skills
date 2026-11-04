@@ -1,7 +1,7 @@
 ---
 name: project-architecture-and-blueprint
 license: MIT
-description: Create and maintain evidence-backed architecture blueprints, governance documents and implementation roadmaps for new or existing software projects. Use for project initialization, architecture decisions, modernization plans or architecture drift analysis; ordinary local fixes do not require a new blueprint.
+description: Create or update project architecture, governance and implementation roadmaps, or trace one business capability end to end for a feature blueprint, onboarding or change-impact analysis. Use for project initialization, significant architecture decisions and scoped feature documentation; ordinary feature coding and local fixes do not require new governance.
 ---
 
 # Project Architecture & Blueprint
@@ -18,12 +18,26 @@ Understand -> Identify uncertainty <-> Research / bounded experiments
 Keep important requirements, decisions, evidence and next actions in the
 repository so work can continue without the original conversation.
 
+## Choose the deliverable
+
+- For project-wide architecture, governance, modernization or drift analysis,
+  follow the project workflow below and its relevant conditional references.
+- For one business feature or capability, follow
+  [Feature implementation blueprints](references/feature-implementation-blueprint.md)
+  as the task workflow. Trace the feature across technical modules using the
+  existing architecture as context. The common scope/authority rules still apply;
+  a feature trace does not require the project-wide workflow or new governance.
+- For a narrow implementation request, complete the authorized change under the
+  existing decisions. Do not create a blueprint merely because code is changing.
+
 ## Scope and authority
 
 - Follow the user's current scope and applicable repository instructions.
   Reuse existing documentation paths, ADR conventions, architecture choices and
   roadmap identifiers. Do not introduce a parallel governance system.
-- A blueprint request authorizes analysis and documentation. Implement only
+- A blueprint creation/update request authorizes analysis and documentation.
+  For review, explanation or diagnosis, remain read-only unless documentation
+  changes are requested. Implement only
   when implementation is within the user's request. A roadmap is not authority
   to execute every phase, deploy, link accounts, incur costs or migrate data.
 - Resolve local implementation details within approved boundaries. For material

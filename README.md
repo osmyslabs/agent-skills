@@ -5,11 +5,12 @@ Reusable engineering workflows for agents that support the open
 
 **Status: experimental.** These skills support architecture and evidence-backed
 improvements within the requested scope. The four-skill catalog is distributed
-in the experimental v0.2.0 release; v0.1.0 contains the architecture skill only.
+in the experimental v0.3.0 release. v0.2.0 added the improvement skills; v0.3.0
+integrates feature implementation blueprints into the architecture skill.
 
 | Skill | Use it for |
 | --- | --- |
-| [Project Architecture & Blueprint](skills/project-architecture-and-blueprint/SKILL.md) | Architecture baselines, researched decisions, bounded experiments, implementation contracts, drift analysis and evidence-backed roadmaps. |
+| [Project Architecture & Blueprint](skills/project-architecture-and-blueprint/SKILL.md) | Project architecture, governance and roadmaps, or an end-to-end implementation blueprint for one business feature. |
 | [Technical Debt Remediation](skills/technical-debt-remediation/SKILL.md) | Prioritize demonstrated debt, preserve contracts and remediate a bounded slice or justify retention. |
 | [Performance Evaluation and Optimization](skills/performance-evaluation-and-optimization/SKILL.md) | Measure representative workloads, find bottlenecks and verify correctness-preserving improvements. |
 | [Security Hardening](skills/security-hardening/SKILL.md) | Triage findings, strengthen controls and verify abuse rejection and legitimate behavior. |
@@ -87,6 +88,13 @@ Use your host's native skill command or identify its installed `SKILL.md` file.
 An agent without a skill loader can read the instructions and relevant references
 explicitly; automatic discovery and adherence are not guaranteed by the format.
 
+For one feature, ask the same skill to trace that business capability end to end.
+Its [feature workflow](skills/project-architecture-and-blueprint/references/feature-implementation-blueprint.md)
+reuses existing architecture and documentation conventions, curates significant
+functions and follows asynchronous/data boundaries. This mode needs no separate
+feature-implementation skill. Explanation-only requests stay read-only unless
+writing documentation is requested.
+
 Choose the primary skill by the requested outcome and reuse existing finding
 records when categories overlap. Each skill is independently usable; see the
 [catalog design](docs/catalog-design.md) for boundaries and maintenance.
@@ -94,7 +102,7 @@ records when categories overlap. Each skill is independently usable; see the
 ## Verification and limitations
 
 The repository includes 48 offline preparation/installation tests, three catalog
-integration tests and 20 synthetic task fixtures. They check package copying, scoped destinations,
+integration tests and 22 synthetic task fixtures. They check package copying, scoped destinations,
 preservation of existing files and evaluation isolation. They do not execute
 models or prove architectural quality. Native Claude Code and Copilot behavior
 remain unverified; package placement does not certify every agent or cloud surface.

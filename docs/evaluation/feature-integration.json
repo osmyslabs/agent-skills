@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-04",
+  "canonical_skill": "project-architecture-and-blueprint",
+  "mode": "feature implementation blueprint",
+  "catalog_cases": 22,
+  "solver": "Fresh delegated Codex solvers; exact model identifier not captured",
+  "grader": "Unblinded maintaining agent: semantic artifact review, hash/file effects and functional reruns",
+  "limits": [
+    "Two synthetic documentation/routing cases only; no full architecture or corpus coverage.",
+    "Raw workspaces, handoffs and machine-specific logs are not distributed; no complete tool/network trace.",
+    "No native Claude Code/Copilot behavior or production renderer integration established."
+  ],
+  "runs": [
+    {
+      "case": "feature-cross-module-trace",
+      "status": "accepted_by_maintainer",
+      "task_sha256": "6b6b113c46e9e75be9a169314eb18cb25bf58d53dcaf66ee51bb2663cfa3ff9b",
+      "corpus_sha256": "ce97572cba3a1acd90c6fa01f1bb17dfa1a7d650035ce0aa1381fec74cceba9a",
+      "instruction_sha256": {
+        "SKILL.md": "2b602dcaedee9eae7f42e08ab412a4eef88378f8a325f9eaa4d1de8e6a33a38c",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "2e5255a3199a0d1017e4ce392837fa8c117a928b3c075c803f2616d2a7432d92",
+        "references/blueprint-documents.md": "1662d413420639ef67912f6fc22aab8e7e5e1891ecfee6a42b2b1c1d7b1ecda0",
+        "references/decision-quality-and-experiments.md": "f78256a1e45325c1f603e87d200b8c05e968edbdea8f38ab13879471d59318e2",
+        "references/domain-boundaries-and-dependencies.md": "bb8b94c34a4f52cd502769fe3973621c8b74d2c11057034569aff75871bdb5ca",
+        "references/feature-blueprint-template.md": "c0a03e972dff2a5548dea9f5b7a30f4184571c6a74b4325070bc3d6ab2cf4d8f",
+        "references/feature-implementation-blueprint.md": "1d93728f613090540bb6db0f390a07bbb3efd46b4a9cf50f5b6364c9de5e944b",
+        "references/feature-payout-example.md": "35da74fc1922c27d3db120d3a3141b3e10f00aa6a4e1a163153093b735dc923a",
+        "references/service-operation-and-safe-evolution.md": "9eecee30fd91139d71524a5e56f8a743e49e40a737c7fceae50f14c422c39853",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "references/terraform-production-lifecycle.md": "93573e69520d1953e23e966ab96d7d359d8d925777184a4e3b50fba63f48c616",
+        "references/threat-analysis.md": "76db4f42e9a074a2708a544894e51981b0ed2bc141c28d0ad2de798dff536828",
+        "agents/openai.yaml": "ee43ffa6cbf935f6524f52172c8088432a2801d36ce07ad3a5d1edb568a5bb4a"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/project-architecture-and-blueprint/agents/openai.yaml": "ee43ffa6cbf935f6524f52172c8088432a2801d36ce07ad3a5d1edb568a5bb4a",
+        ".agents/skills/project-architecture-and-blueprint/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/project-architecture-and-blueprint/references/agent-hosts.md": "2e5255a3199a0d1017e4ce392837fa8c117a928b3c075c803f2616d2a7432d92",
+        ".agents/skills/project-architecture-and-blueprint/references/blueprint-documents.md": "1662d413420639ef67912f6fc22aab8e7e5e1891ecfee6a42b2b1c1d7b1ecda0",
+        ".agents/skills/project-architecture-and-blueprint/references/decision-quality-and-experiments.md": "f78256a1e45325c1f603e87d200b8c05e968edbdea8f38ab13879471d59318e2",
+        ".agents/skills/project-architecture-and-blueprint/references/domain-boundaries-and-dependencies.md": "bb8b94c34a4f52cd502769fe3973621c8b74d2c11057034569aff75871bdb5ca",
+        ".agents/skills/project-architecture-and-blueprint/references/feature-blueprint-template.md": "c0a03e972dff2a5548dea9f5b7a30f4184571c6a74b4325070bc3d6ab2cf4d8f",
+        ".agents/skills/project-architecture-and-blueprint/references/feature-implementation-blueprint.md": "1d93728f613090540bb6db0f390a07bbb3efd46b4a9cf50f5b6364c9de5e944b",
+        ".agents/skills/project-architecture-and-blueprint/references/feature-payout-example.md": "35da74fc1922c27d3db120d3a3141b3e10f00aa6a4e1a163153093b735dc923a",
+        ".agents/skills/project-architecture-and-blueprint/references/service-operation-and-safe-evolution.md": "9eecee30fd91139d71524a5e56f8a743e49e40a737c7fceae50f14c422c39853",
+        ".agents/skills/project-architecture-and-blueprint/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/project-architecture-and-blueprint/references/terraform-production-lifecycle.md": "93573e69520d1953e23e966ab96d7d359d8d925777184a4e3b50fba63f48c616",
+        ".agents/skills/project-architecture-and-blueprint/references/threat-analysis.md": "76db4f42e9a074a2708a544894e51981b0ed2bc141c28d0ad2de798dff536828",
+        ".agents/skills/project-architecture-and-blueprint/SKILL.md": "2b602dcaedee9eae7f42e08ab412a4eef88378f8a325f9eaa4d1de8e6a33a38c",
+        "AGENTS.md": "2950a5a0fc122d81427fe0464e2dad6377d8bbbe408f9968ce58503739122d93",
+        "api.py": "7f280a88789f031113f4452e4f142162b5e424b1b9f036e48179b20961fcfe09",
+        "composition.py": "31e8cad05a26818013700e71d32694ec18897eda947e86840c371a988749b53e",
+        "docs/architecture.md": "0728cc01018512ee4c57d0ecd4ff98645609bdb954f6de5c268e5bef74dfb599",
+        "events.py": "ccf8c1fedbce68d935633e131e86b389d701eb693f1b0ea72ec10f78417cf70b",
+        "exports.py": "60e4517c2718180ccca14c4b761582de5ce6fff78faa092694eabdc202ba44a4",
+        "formatting.py": "c289b918504986f896a6e4e3ddf1b240cda83996e502a1f7a7bea8dc42e72f13",
+        "storage.py": "434c3962670c227b7010175032433db6503508ab168dd08161177a3d216663f8",
+        "test_exports.py": "90bbfd3179f861a500a6a82b1b0f39f8dcb0346c6727ede3b763654ff2cbab9c",
+        "worker.py": "896c72a8d7371a1f01d7c1b214bba21856ff208084eaa54c9d7070f13f02c18d"
+      },
+      "file_effects": {
+        "changed": [],
+        "deleted": [],
+        "added": [
+          "docs/features/document-export/README.md"
+        ],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {
+        "docs/features/document-export/README.md": "ac84903b9df9775eb60c907b1233d7030f0904897108e061555d141708ee78bc"
+      },
+      "handoff_sha256": "65cbb0b37d97f96cf3fe6e8629bf6ae3afc9a3c0e54660f299d29b4be324db96",
+      "verification": {
+        "command": "python -B -m unittest -v test_exports",
+        "exit_code": 0,
+        "summary": [
+          "Ran 3 tests in 0.000s",
+          "OK"
+        ],
+        "output_sha256": "eebf277b879cae8d9146d8c7db8e2030066bdf8c0e15cee3a787e3f58c7a6dc6"
+      },
+      "semantic_review": "Capability-oriented blueprint traces visible request, job, queue, explicit dispatcher and renderer paths; no invented event publication, persistence or real-provider evidence. Curated functions and change-impact guidance; protected inputs unchanged."
+    },
+    {
+      "case": "feature-review-readonly",
+      "status": "accepted_by_maintainer",
+      "task_sha256": "20e0fa2d49fecc86a71703cef9b7b55f12b648cc5b83c39ac776d9b741f713a5",
+      "corpus_sha256": "ce97572cba3a1acd90c6fa01f1bb17dfa1a7d650035ce0aa1381fec74cceba9a",
+      "instruction_sha256": {
+        "SKILL.md": "2b602dcaedee9eae7f42e08ab412a4eef88378f8a325f9eaa4d1de8e6a33a38c",
+        "LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        "references/agent-hosts.md": "2e5255a3199a0d1017e4ce392837fa8c117a928b3c075c803f2616d2a7432d92",
+        "references/blueprint-documents.md": "1662d413420639ef67912f6fc22aab8e7e5e1891ecfee6a42b2b1c1d7b1ecda0",
+        "references/decision-quality-and-experiments.md": "f78256a1e45325c1f603e87d200b8c05e968edbdea8f38ab13879471d59318e2",
+        "references/domain-boundaries-and-dependencies.md": "bb8b94c34a4f52cd502769fe3973621c8b74d2c11057034569aff75871bdb5ca",
+        "references/feature-blueprint-template.md": "c0a03e972dff2a5548dea9f5b7a30f4184571c6a74b4325070bc3d6ab2cf4d8f",
+        "references/feature-implementation-blueprint.md": "1d93728f613090540bb6db0f390a07bbb3efd46b4a9cf50f5b6364c9de5e944b",
+        "references/feature-payout-example.md": "35da74fc1922c27d3db120d3a3141b3e10f00aa6a4e1a163153093b735dc923a",
+        "references/service-operation-and-safe-evolution.md": "9eecee30fd91139d71524a5e56f8a743e49e40a737c7fceae50f14c422c39853",
+        "references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        "references/terraform-production-lifecycle.md": "93573e69520d1953e23e966ab96d7d359d8d925777184a4e3b50fba63f48c616",
+        "references/threat-analysis.md": "76db4f42e9a074a2708a544894e51981b0ed2bc141c28d0ad2de798dff536828",
+        "agents/openai.yaml": "ee43ffa6cbf935f6524f52172c8088432a2801d36ce07ad3a5d1edb568a5bb4a"
+      },
+      "initial_files_sha256": {
+        ".agents/skills/project-architecture-and-blueprint/agents/openai.yaml": "ee43ffa6cbf935f6524f52172c8088432a2801d36ce07ad3a5d1edb568a5bb4a",
+        ".agents/skills/project-architecture-and-blueprint/LICENSE": "82e1d49c57883acae3a6cea1fc6fc51b662482d4c8fae72be2918423485d472a",
+        ".agents/skills/project-architecture-and-blueprint/references/agent-hosts.md": "2e5255a3199a0d1017e4ce392837fa8c117a928b3c075c803f2616d2a7432d92",
+        ".agents/skills/project-architecture-and-blueprint/references/blueprint-documents.md": "1662d413420639ef67912f6fc22aab8e7e5e1891ecfee6a42b2b1c1d7b1ecda0",
+        ".agents/skills/project-architecture-and-blueprint/references/decision-quality-and-experiments.md": "f78256a1e45325c1f603e87d200b8c05e968edbdea8f38ab13879471d59318e2",
+        ".agents/skills/project-architecture-and-blueprint/references/domain-boundaries-and-dependencies.md": "bb8b94c34a4f52cd502769fe3973621c8b74d2c11057034569aff75871bdb5ca",
+        ".agents/skills/project-architecture-and-blueprint/references/feature-blueprint-template.md": "c0a03e972dff2a5548dea9f5b7a30f4184571c6a74b4325070bc3d6ab2cf4d8f",
+        ".agents/skills/project-architecture-and-blueprint/references/feature-implementation-blueprint.md": "1d93728f613090540bb6db0f390a07bbb3efd46b4a9cf50f5b6364c9de5e944b",
+        ".agents/skills/project-architecture-and-blueprint/references/feature-payout-example.md": "35da74fc1922c27d3db120d3a3141b3e10f00aa6a4e1a163153093b735dc923a",
+        ".agents/skills/project-architecture-and-blueprint/references/service-operation-and-safe-evolution.md": "9eecee30fd91139d71524a5e56f8a743e49e40a737c7fceae50f14c422c39853",
+        ".agents/skills/project-architecture-and-blueprint/references/skill-evaluation.md": "3e4f0c320f7ea2827a6fadfbe7e1aa7ccbf8c140aaff1c3706c9b362977beb1b",
+        ".agents/skills/project-architecture-and-blueprint/references/terraform-production-lifecycle.md": "93573e69520d1953e23e966ab96d7d359d8d925777184a4e3b50fba63f48c616",
+        ".agents/skills/project-architecture-and-blueprint/references/threat-analysis.md": "76db4f42e9a074a2708a544894e51981b0ed2bc141c28d0ad2de798dff536828",
+        ".agents/skills/project-architecture-and-blueprint/SKILL.md": "2b602dcaedee9eae7f42e08ab412a4eef88378f8a325f9eaa4d1de8e6a33a38c",
+        "AGENTS.md": "2950a5a0fc122d81427fe0464e2dad6377d8bbbe408f9968ce58503739122d93",
+        "api.py": "7f280a88789f031113f4452e4f142162b5e424b1b9f036e48179b20961fcfe09",
+        "composition.py": "31e8cad05a26818013700e71d32694ec18897eda947e86840c371a988749b53e",
+        "docs/architecture.md": "0728cc01018512ee4c57d0ecd4ff98645609bdb954f6de5c268e5bef74dfb599",
+        "events.py": "ccf8c1fedbce68d935633e131e86b389d701eb693f1b0ea72ec10f78417cf70b",
+        "exports.py": "60e4517c2718180ccca14c4b761582de5ce6fff78faa092694eabdc202ba44a4",
+        "formatting.py": "c289b918504986f896a6e4e3ddf1b240cda83996e502a1f7a7bea8dc42e72f13",
+        "storage.py": "434c3962670c227b7010175032433db6503508ab168dd08161177a3d216663f8",
+        "test_exports.py": "90bbfd3179f861a500a6a82b1b0f39f8dcb0346c6727ede3b763654ff2cbab9c",
+        "worker.py": "896c72a8d7371a1f01d7c1b214bba21856ff208084eaa54c9d7070f13f02c18d"
+      },
+      "file_effects": {
+        "changed": [],
+        "deleted": [],
+        "added": [],
+        "forbidden_effects": [],
+        "workspace_effect_check_passed": true
+      },
+      "artifact_sha256": {},
+      "handoff_sha256": "5dfccd0f669bec72107994a55d03245e33c3decbb28f88ba66f163b63b0903d9",
+      "verification": {
+        "command": "python -B -m unittest -v test_exports",
+        "exit_code": 0,
+        "summary": [
+          "Ran 3 tests in 0.000s",
+          "OK"
+        ],
+        "output_sha256": "eebf277b879cae8d9146d8c7db8e2030066bdf8c0e15cee3a787e3f58c7a6dc6"
+      },
+      "semantic_review": "Explains confirmed paths and the renderer change boundary in the sibling handoff only, without workspace writes or treating fake tests as production evidence."
+    }
+  ]
+}

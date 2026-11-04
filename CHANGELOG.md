@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 — 2026-11-04
+
+- Integrate feature-implementation-blueprint into the architecture skill as a
+  scoped feature mode, with its adaptable template and fictional payout example.
+- Keep feature explanation/review requests read-only and route feature traces
+  separately from project-wide governance.
+- Add two synthetic feature-mode cases; the catalog now contains 22 cases.
+
 ## 0.2.0 — 2026-11-04
 
 - Add technical-debt-remediation, performance-evaluation-and-optimization and

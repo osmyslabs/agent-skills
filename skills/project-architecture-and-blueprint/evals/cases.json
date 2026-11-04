@@ -173,6 +173,61 @@
           "Does not impose a universal SLO, canary platform, review committee or numerical budget."
         ]
       }
+    },
+    {
+      "id": "feature-cross-module-trace",
+      "request": "Create an evidence-backed implementation blueprint for the document-export capability for developer onboarding and change-impact analysis. Follow its actual request and asynchronous paths across modules, identify significant functions and useful tests, and record gaps. Reuse the repository documentation convention. Do not change runtime code or project-wide governance.",
+      "files": {
+        "AGENTS.md": "Read docs/architecture.md. Document by business capability under docs/features/<slug>/README.md. Preserve supplied files. Use python -B for local Python checks. This task does not authorize runtime changes or project-wide governance changes.\n",
+        "docs/architecture.md": "# Accepted architecture\nThe product owns authorization and export-job storage. The local queue is drained explicitly by dispatch_next; no autonomous scheduler is supplied. A renderer is injected through its render method; no real renderer implementation or provider deployment is supplied. Reuse this document as context rather than replacing it.\n",
+        "api.py": "from exports import request_export\n\ndef post_export(actor, body, store, queue, events):\n    return request_export(actor, body[\"document_id\"], store, queue, events)\n",
+        "exports.py": "def request_export(actor, document_id, store, queue, events):\n    document = store.documents[document_id]\n    if actor[\"tenant_id\"] != document[\"tenant_id\"]:\n        raise PermissionError(\"different tenant\")\n    job_id = str(len(store.jobs) + 1)\n    store.jobs[job_id] = {\"document_id\": document_id, \"status\": \"PENDING\"}\n    queue.append({\"kind\": \"render-export\", \"job_id\": job_id})\n    return {\"job_id\": job_id}\n",
+        "worker.py": "def render_export(message, store, renderer):\n    job = store.jobs[message[\"job_id\"]]\n    document = store.documents[job[\"document_id\"]]\n    result_url = renderer.render(document)\n    job.update({\"status\": \"READY\", \"url\": result_url})\n    return result_url\n",
+        "composition.py": "from api import post_export\nfrom worker import render_export\n\nROUTES = {\"/exports\": post_export}\nHANDLERS = {\"render-export\": render_export}\n\ndef dispatch_next(queue, store, renderer):\n    message = queue.pop(0)\n    return HANDLERS[message[\"kind\"]](message, store, renderer)\n",
+        "storage.py": "class Store:\n    def __init__(self):\n        self.documents = {\"doc-1\": {\"tenant_id\": \"alpha\", \"text\": \"sample\"}}\n        self.jobs = {}\n",
+        "events.py": "class EventBus:\n    def publish(self, name, payload):\n        raise NotImplementedError\n",
+        "formatting.py": "def trim(value):\n    return value.strip()\n",
+        "test_exports.py": "import unittest\nfrom api import post_export\nfrom composition import dispatch_next\nfrom storage import Store\n\nclass FakeRenderer:\n    def render(self, document):\n        return \"fixture-output\"\n\nclass ExportTests(unittest.TestCase):\n    def test_request(self):\n        store, queue = Store(), []\n        self.assertEqual(post_export({\"tenant_id\": \"alpha\"}, {\"document_id\": \"doc-1\"}, store, queue, object()), {\"job_id\": \"1\"})\n        self.assertEqual(store.jobs[\"1\"][\"status\"], \"PENDING\")\n        self.assertEqual(queue, [{\"kind\": \"render-export\", \"job_id\": \"1\"}])\n    def test_other_tenant(self):\n        store, queue = Store(), []\n        with self.assertRaises(PermissionError):\n            post_export({\"tenant_id\": \"beta\"}, {\"document_id\": \"doc-1\"}, store, queue, object())\n        self.assertEqual(store.jobs, {})\n        self.assertEqual(queue, [])\n    def test_local_dispatch(self):\n        store, queue = Store(), []\n        post_export({\"tenant_id\": \"alpha\"}, {\"document_id\": \"doc-1\"}, store, queue, object())\n        self.assertEqual(dispatch_next(queue, store, FakeRenderer()), \"fixture-output\")\n        self.assertEqual(store.jobs[\"1\"][\"status\"], \"READY\")\n"
+      },
+      "checks": {
+        "mutable_files": [],
+        "allowed_new_prefixes": [
+          "docs/features/document-export/"
+        ],
+        "criteria": [
+          "Uses feature mode and writes a primary docs/features/document-export/README.md without new project-wide governance.",
+          "Traces request authorization, job persistence, queue, concrete handler dispatch and READY transition from visible calls and wiring.",
+          "Labels the external renderer and operating behavior unverified; local fake tests do not prove production wiring or retries.",
+          "Does not infer publication from an injected unused event bus or invent idempotency, money movement, rollback or provider behavior.",
+          "Curates significant functions and explains why they matter; excludes unused trivial formatting helpers and records change impact.",
+          "Preserves all supplied runtime, tests, architecture and instruction bytes; fictional example is not repository evidence."
+        ]
+      }
+    },
+    {
+      "id": "feature-review-readonly",
+      "request": "Explain how document export runs and where a change to the renderer would take effect. This is an explanation only: do not create or update a blueprint, source, tests or governance. Put your answer in the sibling handoff.md only.",
+      "files": {
+        "AGENTS.md": "Read docs/architecture.md. Document by business capability under docs/features/<slug>/README.md. Preserve supplied files. Use python -B for local Python checks. This task does not authorize runtime changes or project-wide governance changes.\n",
+        "docs/architecture.md": "# Accepted architecture\nThe product owns authorization and export-job storage. The local queue is drained explicitly by dispatch_next; no autonomous scheduler is supplied. A renderer is injected through its render method; no real renderer implementation or provider deployment is supplied. Reuse this document as context rather than replacing it.\n",
+        "api.py": "from exports import request_export\n\ndef post_export(actor, body, store, queue, events):\n    return request_export(actor, body[\"document_id\"], store, queue, events)\n",
+        "exports.py": "def request_export(actor, document_id, store, queue, events):\n    document = store.documents[document_id]\n    if actor[\"tenant_id\"] != document[\"tenant_id\"]:\n        raise PermissionError(\"different tenant\")\n    job_id = str(len(store.jobs) + 1)\n    store.jobs[job_id] = {\"document_id\": document_id, \"status\": \"PENDING\"}\n    queue.append({\"kind\": \"render-export\", \"job_id\": job_id})\n    return {\"job_id\": job_id}\n",
+        "worker.py": "def render_export(message, store, renderer):\n    job = store.jobs[message[\"job_id\"]]\n    document = store.documents[job[\"document_id\"]]\n    result_url = renderer.render(document)\n    job.update({\"status\": \"READY\", \"url\": result_url})\n    return result_url\n",
+        "composition.py": "from api import post_export\nfrom worker import render_export\n\nROUTES = {\"/exports\": post_export}\nHANDLERS = {\"render-export\": render_export}\n\ndef dispatch_next(queue, store, renderer):\n    message = queue.pop(0)\n    return HANDLERS[message[\"kind\"]](message, store, renderer)\n",
+        "storage.py": "class Store:\n    def __init__(self):\n        self.documents = {\"doc-1\": {\"tenant_id\": \"alpha\", \"text\": \"sample\"}}\n        self.jobs = {}\n",
+        "events.py": "class EventBus:\n    def publish(self, name, payload):\n        raise NotImplementedError\n",
+        "formatting.py": "def trim(value):\n    return value.strip()\n",
+        "test_exports.py": "import unittest\nfrom api import post_export\nfrom composition import dispatch_next\nfrom storage import Store\n\nclass FakeRenderer:\n    def render(self, document):\n        return \"fixture-output\"\n\nclass ExportTests(unittest.TestCase):\n    def test_request(self):\n        store, queue = Store(), []\n        self.assertEqual(post_export({\"tenant_id\": \"alpha\"}, {\"document_id\": \"doc-1\"}, store, queue, object()), {\"job_id\": \"1\"})\n        self.assertEqual(store.jobs[\"1\"][\"status\"], \"PENDING\")\n        self.assertEqual(queue, [{\"kind\": \"render-export\", \"job_id\": \"1\"}])\n    def test_other_tenant(self):\n        store, queue = Store(), []\n        with self.assertRaises(PermissionError):\n            post_export({\"tenant_id\": \"beta\"}, {\"document_id\": \"doc-1\"}, store, queue, object())\n        self.assertEqual(store.jobs, {})\n        self.assertEqual(queue, [])\n    def test_local_dispatch(self):\n        store, queue = Store(), []\n        post_export({\"tenant_id\": \"alpha\"}, {\"document_id\": \"doc-1\"}, store, queue, object())\n        self.assertEqual(dispatch_next(queue, store, FakeRenderer()), \"fixture-output\")\n        self.assertEqual(store.jobs[\"1\"][\"status\"], \"READY\")\n"
+      },
+      "checks": {
+        "mutable_files": [],
+        "allowed_new_prefixes": [],
+        "criteria": [
+          "Explains the actual request/queue/dispatch/renderer path and the relevant change boundary.",
+          "Keeps inferred or unavailable external renderer behavior distinct from confirmed local behavior.",
+          "Leaves the whole workspace unchanged and answers in the sibling handoff only; feature explanation does not trigger document creation."
+        ]
+      }
     }
   ]
 }

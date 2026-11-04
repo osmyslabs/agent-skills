@@ -23,6 +23,7 @@ depend on the agent host; this index does not install or activate a skill.
 
 ## Architecture references
 
+- [Feature implementation blueprints](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/feature-implementation-blueprint.md): Integrated feature mode for cross-module execution tracing, curated functions, evidence and change impact.
 
 - [Blueprint documents and roadmaps](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/blueprint-documents.md): Adaptable documentation contracts and implementation tracking.
 - [Decision quality and experiments](https://raw.githubusercontent.com/osmyslabs/agent-skills/main/skills/project-architecture-and-blueprint/references/decision-quality-and-experiments.md): Alternatives, uncertainty, bounded experiments and capacity/cost evidence.

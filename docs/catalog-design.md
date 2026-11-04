@@ -7,6 +7,7 @@ platform.
 | Outcome | Primary skill | Completion evidence |
 | --- | --- | --- |
 | Architecture/contract decision | project-architecture-and-blueprint | Observed baseline, decisions, acceptance and roadmap. |
+| Trace one business capability | project-architecture-and-blueprint, feature mode | Feature-owned/shared boundaries, significant functions, execution paths, evidence gaps and change impact. |
 | Reduce maintenance burden | technical-debt-remediation | Characterized behavior, bounded correction or justified retention and checks. |
 | Explain/improve performance | performance-evaluation-and-optimization | Representative baseline, cause, comparable results, correctness and uncertainty. |
 | Reduce a security risk | security-hardening | Qualified finding, owning control, abuse/legitimate tests and residual risk. |
@@ -15,6 +16,14 @@ Choose by requested outcome; categories can overlap. Reuse one finding/backlog
 entry and its evidence. Significant boundary/contract changes follow the consumer
 repository's decisions. No skill requires another, a provider, external account
 or fixed documentation tree. Assessment-only requests remain bounded.
+
+On 4 November 2026, the standalone feature-implementation-blueprint workflow was
+integrated into the architecture package as conditional references, including its
+template and explicitly fictional example. The canonical skill name is unchanged.
+Feature-mode tasks use existing architecture as context and do not run the
+project-wide governance sequence. Explanation/review requests do not grant
+permission to create documentation. The package has no runtime dependency on the
+former standalone skill.
 
 ## Standalone packages
 
